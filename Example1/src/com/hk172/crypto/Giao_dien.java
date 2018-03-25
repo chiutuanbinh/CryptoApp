@@ -20,6 +20,8 @@ import javax.xml.bind.DatatypeConverter;
 public class Giao_dien extends javax.swing.JFrame {
     private File inputEncryptFile;
     private File inputEncryptKey;
+    private File inputDecryptFile;
+    private File inputDecryptKey;
     private HashAlgorithm hashAlgorithm = new HashAlgorithm();
     private CryptoAlgorithm cryptoAlgorithm;
     private DESCrypto dESCrypto = new DESCrypto();
@@ -363,7 +365,22 @@ public class Giao_dien extends javax.swing.JFrame {
 
     private void Decrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrypt_buttonActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Successful");
+        boolean successful = false;
+        try {            
+            cryptoAlgorithm.setInputFile(inputDecryptFile);
+            cryptoAlgorithm.setInputKey(inputDecryptKey);
+            byte[] encryptResult = cryptoAlgorithm.decrypt();
+            
+            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt.cm");
+            fs.write(encryptResult);
+            fs.close();
+            successful = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed");
+        }
+        if (successful)
+            JOptionPane.showMessageDialog(null, "Successful");
     }//GEN-LAST:event_Decrypt_buttonActionPerformed
 
     private void file_path1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_path1ActionPerformed
@@ -396,16 +413,22 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         open_file obj= new open_file();
         try {
-            inputEncryptKey = obj.pick_me();
+            inputDecryptFile = obj.pick_me();
         }catch (Exception e){
             e.printStackTrace();
         }
-        file_path.setText(obj.sb2);
+        file_path1.setText(obj.sb2);
     }//GEN-LAST:event_open_file1ActionPerformed
 
     private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
         // TODO add your handling code here:
-
+        open_file obj= new open_file();
+        try {
+            inputDecryptKey = obj.pick_me();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        key_path1.setText(obj.sb2);
     }//GEN-LAST:event_open_key1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed

@@ -36,7 +36,7 @@ public class DESCrypto extends CryptoAlgorithm{
     public byte[] encrypt() throws Exception {
         byte[] input = readFile(inputFile);
         byte[] key = readKey(inputKey);
-        System.out.println(DatatypeConverter.printHexBinary(key));
+        
         SecretKey skey = factory.generateSecret(new DESKeySpec(key));
         encryptCipher.init(Cipher.ENCRYPT_MODE, skey);
         
@@ -47,6 +47,7 @@ public class DESCrypto extends CryptoAlgorithm{
     public byte[] decrypt() throws Exception {
         byte[] input = readFile(inputFile);
         byte[] key = readKey(inputKey);
+        System.out.println(DatatypeConverter.printHexBinary(key));
         SecretKey sKey = factory.generateSecret(new DESKeySpec(key));
         decryptCipher.init(Cipher.DECRYPT_MODE, sKey);
         
