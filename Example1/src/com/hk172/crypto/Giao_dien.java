@@ -9,6 +9,7 @@ import com.hk172.crypto.algorithm.AESCrypto;
 import com.hk172.crypto.algorithm.CryptoAlgorithm;
 import com.hk172.crypto.algorithm.DESCrypto;
 import com.hk172.crypto.algorithm.HashAlgorithm;
+import com.hk172.crypto.algorithm.RSACrypto;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,6 +30,7 @@ public class Giao_dien extends javax.swing.JFrame {
     private CryptoAlgorithm decryptAlgorithm;
     private DESCrypto dESCrypto = new DESCrypto();
     private AESCrypto aESCrypto = new AESCrypto();
+    private RSACrypto rSACrypto = new RSACrypto();
     /**
      * Creates new form Giao_dien
      */
@@ -37,6 +39,7 @@ public class Giao_dien extends javax.swing.JFrame {
         this.hashAlgorithm.setHashType("MD5");
         encryptAlgorithm = dESCrypto;
         decryptAlgorithm = dESCrypto;
+        
     }
     
     /**
@@ -375,9 +378,9 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean successful = false;
         try {            
-            encryptAlgorithm.setInputFile(inputDecryptFile);
-            encryptAlgorithm.setInputKey(inputDecryptKey);
-            byte[] encryptResult = encryptAlgorithm.decrypt();
+            decryptAlgorithm.setInputFile(inputDecryptFile);
+            decryptAlgorithm.setInputKey(inputDecryptKey);
+            byte[] encryptResult = decryptAlgorithm.decrypt();
             
             FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt.cm");
             fs.write(encryptResult);
@@ -472,6 +475,8 @@ public class Giao_dien extends javax.swing.JFrame {
                 encryptAlgorithm = dESCrypto;
             if (selectedItem.equals("AES"))
                 encryptAlgorithm = aESCrypto;
+            if (selectedItem.equals("RSA"))
+                encryptAlgorithm = rSACrypto;
         }
         else 
             return;
@@ -485,6 +490,8 @@ public class Giao_dien extends javax.swing.JFrame {
                 decryptAlgorithm = dESCrypto;
             if (selectedItem.equals("AES"))
                 decryptAlgorithm = aESCrypto;
+            if (selectedItem.equals("RSA"))
+                decryptAlgorithm = rSACrypto;
         }
         else 
             return;
