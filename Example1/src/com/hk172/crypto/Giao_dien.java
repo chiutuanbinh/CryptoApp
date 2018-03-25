@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example1;
+package com.hk172.crypto;
 
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +20,10 @@ public class Giao_dien extends javax.swing.JFrame {
     public Giao_dien() {
         initComponents();
     }
-
+    
+    private File inputEncryptFile;
+    private File inputEncryptKey;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +95,7 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel3.setText("CHọn phương thức mã hóa: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ceasar", "...", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DES", "AES", "RSA" }));
 
         percent_.setText("100%");
 
@@ -360,24 +364,29 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         open_file obj= new open_file();
         try {
-            obj.pick_me();
+            inputEncryptFile = obj.pick_me();
         }catch (Exception e){
             e.printStackTrace();
         }
         file_path.setText(obj.sb2);
-        key_path.setText(obj.sb1.toString());
     }//GEN-LAST:event_open_fileActionPerformed
 
     private void open_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_keyActionPerformed
         // TODO add your handling code here:
-
+        open_file obj= new open_file();
+        try {
+            inputEncryptFile = obj.pick_me();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        key_path.setText(obj.sb2);
     }//GEN-LAST:event_open_keyActionPerformed
 
     private void open_file1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_file1ActionPerformed
         // TODO add your handling code here:
         open_file obj= new open_file();
         try {
-            obj.pick_me();
+            inputEncryptKey = obj.pick_me();
         }catch (Exception e){
             e.printStackTrace();
         }

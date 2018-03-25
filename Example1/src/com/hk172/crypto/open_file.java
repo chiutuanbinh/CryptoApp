@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example1;
+package com.hk172.crypto;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,11 +19,12 @@ public class open_file {
     StringBuilder sb1 = new StringBuilder();
     String sb2;
     
-    public void pick_me() throws FileNotFoundException{
+    public File pick_me() throws FileNotFoundException{
+        File returnFile = null;
         if (file_chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-            File file = file_chooser.getSelectedFile();
-            sb2 = file.getPath();
-            try (Scanner input = new Scanner(file)) {
+            returnFile = file_chooser.getSelectedFile();
+            sb2 = returnFile.getPath();
+            try (Scanner input = new Scanner(returnFile)) {
                 while (input.hasNext()){
                     sb1.append(input.nextLine());
                     sb1.append("\n");
@@ -33,5 +34,6 @@ public class open_file {
         else {
             sb1.append("No file was selected");
         }
+        return returnFile;
     }
 }
