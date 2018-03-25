@@ -6,16 +6,32 @@
 package com.hk172.crypto.algorithm;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.security.MessageDigest;
 
 /**
  *
  * @author binhchiu
  */
-public abstract class HashAlgorithm implements Algorithm{
+public class HashAlgorithm {
     protected File input;
-    
+    protected String hashType;
     public void setInput(File input){
         this.input = input ;
     }
-    public abstract byte[] readFile() throws Throwable;
+    private byte[] readFile() throws Exception{
+        return Files.readAllBytes(input.toPath());
+    }
+
+    public void setHashType(String hashType){
+        this.hashType = hashType;
+    }
+    
+    public byte[] run() throws Exception {
+        byte[] input = readFile();
+        MessageDigest md = MessageDigest.getInstance(hashType);
+        return md.digest(input);
+    }
+    
+    
 }

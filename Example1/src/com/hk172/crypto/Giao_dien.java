@@ -5,24 +5,34 @@
  */
 package com.hk172.crypto;
 
+import com.hk172.crypto.algorithm.CryptoAlgorithm;
+import com.hk172.crypto.algorithm.DESCrypto;
+import com.hk172.crypto.algorithm.HashAlgorithm;
 import java.io.File;
+import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
  * @author ASUS
  */
 public class Giao_dien extends javax.swing.JFrame {
-
+    private File inputEncryptFile;
+    private File inputEncryptKey;
+    private HashAlgorithm hashAlgorithm = new HashAlgorithm();
+    private CryptoAlgorithm cryptoAlgorithm;
+    private DESCrypto dESCrypto = new DESCrypto();
     /**
      * Creates new form Giao_dien
      */
     public Giao_dien() {
         initComponents();
+        this.hashAlgorithm.setHashType("MD5");
+        cryptoAlgorithm = dESCrypto;
     }
     
-    private File inputEncryptFile;
-    private File inputEncryptKey;
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +73,7 @@ public class Giao_dien extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jProgressBar2 = new javax.swing.JProgressBar();
         percent_1 = new javax.swing.JTextField();
-        Encrypt_button1 = new javax.swing.JButton();
+        Decrypt_button = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         hash_text1 = new javax.swing.JTextField();
 
@@ -226,10 +236,10 @@ public class Giao_dien extends javax.swing.JFrame {
 
         percent_1.setText("100%");
 
-        Encrypt_button1.setText("Decrypt");
-        Encrypt_button1.addActionListener(new java.awt.event.ActionListener() {
+        Decrypt_button.setText("Decrypt");
+        Decrypt_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Encrypt_button1ActionPerformed(evt);
+                Decrypt_buttonActionPerformed(evt);
             }
         });
 
@@ -270,7 +280,7 @@ public class Giao_dien extends javax.swing.JFrame {
                         .addComponent(percent_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
-                        .addComponent(Encrypt_button1))
+                        .addComponent(Decrypt_button))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -304,7 +314,7 @@ public class Giao_dien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(percent_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Encrypt_button1)
+                .addComponent(Decrypt_button)
                 .addContainerGap())
         );
 
@@ -351,10 +361,10 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_file_pathActionPerformed
 
-    private void Encrypt_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Encrypt_button1ActionPerformed
+    private void Decrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrypt_buttonActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Successful");
-    }//GEN-LAST:event_Encrypt_button1ActionPerformed
+    }//GEN-LAST:event_Decrypt_buttonActionPerformed
 
     private void file_path1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_path1ActionPerformed
         // TODO add your handling code here:
@@ -375,7 +385,7 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         open_file obj= new open_file();
         try {
-            inputEncryptFile = obj.pick_me();
+            inputEncryptKey = obj.pick_me();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -391,7 +401,6 @@ public class Giao_dien extends javax.swing.JFrame {
             e.printStackTrace();
         }
         file_path.setText(obj.sb2);
-        key_path.setText(obj.sb1.toString());
     }//GEN-LAST:event_open_file1ActionPerformed
 
     private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
@@ -405,8 +414,26 @@ public class Giao_dien extends javax.swing.JFrame {
 
     private void Encrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Encrypt_buttonActionPerformed
         // TODO add your handling code here:
-        
-        JOptionPane.showMessageDialog(null, "Successful");
+        boolean successful = false;
+        try {
+            hashAlgorithm.setInput(inputEncryptFile);
+            byte[] hashResult = hashAlgorithm.run();
+            hash_text.setText(DatatypeConverter.printHexBinary(hashResult));
+            
+            cryptoAlgorithm.setInputFile(inputEncryptFile);
+            cryptoAlgorithm.setInputKey(inputEncryptKey);
+            byte[] encryptResult = cryptoAlgorithm.encrypt();
+            
+            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt.cm");
+            fs.write(encryptResult);
+            fs.close();
+            successful = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed");
+        }
+        if (successful)
+            JOptionPane.showMessageDialog(null, "Successful");
     }//GEN-LAST:event_Encrypt_buttonActionPerformed
 
     /**
@@ -445,8 +472,8 @@ public class Giao_dien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Decrypt_button;
     private javax.swing.JButton Encrypt_button;
-    private javax.swing.JButton Encrypt_button1;
     private javax.swing.JTextField file_check_type;
     private javax.swing.JTextField file_check_type1;
     private javax.swing.JTextField file_path;
