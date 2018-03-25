@@ -33,10 +33,18 @@ public abstract class CryptoAlgorithm {
         return DatatypeConverter.parseHexBinary(key);
     }
     
+    /**
+     * Set the input file for the algorithm
+     * @param input the input file used for en/decrypt 
+     */
     public void setInputFile(File input){
         this.inputFile = input;
     }
     
+    /**
+     * Set the input key file for the algorithm
+     * @param key the key text tile used for en/decrypt
+     */
     public void setInputKey(File key){
         this.inputKey = key;
     }

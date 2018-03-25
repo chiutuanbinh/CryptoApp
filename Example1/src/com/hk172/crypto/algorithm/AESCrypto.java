@@ -7,47 +7,48 @@ package com.hk172.crypto.algorithm;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  *
  * @author binhchiu
  */
-public class DESCrypto extends CryptoAlgorithm{
-    
-    private SecretKeyFactory factory ;
+public class AESCrypto extends CryptoAlgorithm{
+
     private Cipher encryptCipher ;
     private Cipher decryptCipher ;
-    public DESCrypto(){
+    
+    public AESCrypto(){
         super();
         try {
-            factory = SecretKeyFactory.getInstance("DES");
-            encryptCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            decryptCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            encryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            decryptCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
+    
     
     @Override
     public byte[] encrypt() throws Exception {
         byte[] input = readFile(inputFile);
         byte[] key = readKey(inputKey);
         
-        SecretKey skey = factory.generateSecret(new DESKeySpec(key));
-        encryptCipher.init(Cipher.ENCRYPT_MODE, skey);
+        SecretKey sKey = new SecretKeySpec(key, "AES");
+        IvParameterSpec iv = new IvParameterSpec(sKey.getEncoded());
+        encryptCipher.init(Cipher.ENCRYPT_MODE, sKey, iv);
         
         return encryptCipher.doFinal(input);
-        
     }
+
     @Override
     public byte[] decrypt() throws Exception {
         byte[] input = readFile(inputFile);
         byte[] key = readKey(inputKey);
-        SecretKey sKey = factory.generateSecret(new DESKeySpec(key));
-        decryptCipher.init(Cipher.DECRYPT_MODE, sKey);
+        SecretKey sKey = new SecretKeySpec(key, "AES");
+        IvParameterSpec iv = new IvParameterSpec(sKey.getEncoded());
+        decryptCipher.init(Cipher.DECRYPT_MODE, sKey, iv);
         
         return decryptCipher.doFinal(input);
     }

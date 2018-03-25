@@ -5,9 +5,11 @@
  */
 package com.hk172.crypto;
 
+import com.hk172.crypto.algorithm.AESCrypto;
 import com.hk172.crypto.algorithm.CryptoAlgorithm;
 import com.hk172.crypto.algorithm.DESCrypto;
 import com.hk172.crypto.algorithm.HashAlgorithm;
+import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
@@ -23,18 +25,19 @@ public class Giao_dien extends javax.swing.JFrame {
     private File inputDecryptFile;
     private File inputDecryptKey;
     private HashAlgorithm hashAlgorithm = new HashAlgorithm();
-    private CryptoAlgorithm cryptoAlgorithm;
+    private CryptoAlgorithm encryptAlgorithm;
+    private CryptoAlgorithm decryptAlgorithm;
     private DESCrypto dESCrypto = new DESCrypto();
+    private AESCrypto aESCrypto = new AESCrypto();
     /**
      * Creates new form Giao_dien
      */
     public Giao_dien() {
         initComponents();
         this.hashAlgorithm.setHashType("MD5");
-        cryptoAlgorithm = dESCrypto;
+        encryptAlgorithm = dESCrypto;
+        decryptAlgorithm = dESCrypto;
     }
-    
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,6 +111,11 @@ public class Giao_dien extends javax.swing.JFrame {
         jLabel3.setText("CHọn phương thức mã hóa: ");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DES", "AES", "RSA" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         percent_.setText("100%");
 
@@ -229,10 +237,10 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel7.setText("CHọn phương thức giải mã: ");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ceasar", "...", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DES", "AES", "RSA" }));
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
             }
         });
 
@@ -367,9 +375,9 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean successful = false;
         try {            
-            cryptoAlgorithm.setInputFile(inputDecryptFile);
-            cryptoAlgorithm.setInputKey(inputDecryptKey);
-            byte[] encryptResult = cryptoAlgorithm.decrypt();
+            encryptAlgorithm.setInputFile(inputDecryptFile);
+            encryptAlgorithm.setInputKey(inputDecryptKey);
+            byte[] encryptResult = encryptAlgorithm.decrypt();
             
             FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt.cm");
             fs.write(encryptResult);
@@ -431,21 +439,18 @@ public class Giao_dien extends javax.swing.JFrame {
         key_path1.setText(obj.sb2);
     }//GEN-LAST:event_open_key1ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
     private void Encrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Encrypt_buttonActionPerformed
         // TODO add your handling code here:
         boolean successful = false;
         try {
+            
             hashAlgorithm.setInput(inputEncryptFile);
             byte[] hashResult = hashAlgorithm.run();
             hash_text.setText(DatatypeConverter.printHexBinary(hashResult));
             
-            cryptoAlgorithm.setInputFile(inputEncryptFile);
-            cryptoAlgorithm.setInputKey(inputEncryptKey);
-            byte[] encryptResult = cryptoAlgorithm.encrypt();
+            encryptAlgorithm.setInputFile(inputEncryptFile);
+            encryptAlgorithm.setInputKey(inputEncryptKey);
+            byte[] encryptResult = encryptAlgorithm.encrypt();
             
             FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt.cm");
             fs.write(encryptResult);
@@ -458,6 +463,32 @@ public class Giao_dien extends javax.swing.JFrame {
         if (successful)
             JOptionPane.showMessageDialog(null, "Successful");
     }//GEN-LAST:event_Encrypt_buttonActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED){
+            String selectedItem = jComboBox1.getSelectedItem().toString();
+            if (selectedItem.equals("DES"))
+                encryptAlgorithm = dESCrypto;
+            if (selectedItem.equals("AES"))
+                encryptAlgorithm = aESCrypto;
+        }
+        else 
+            return;
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED){
+            String selectedItem = jComboBox2.getSelectedItem().toString();
+            if (selectedItem.equals("DES"))
+                decryptAlgorithm = dESCrypto;
+            if (selectedItem.equals("AES"))
+                decryptAlgorithm = aESCrypto;
+        }
+        else 
+            return;
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     /**
      * @param args the command line arguments
