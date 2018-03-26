@@ -21,6 +21,7 @@ import javax.xml.bind.DatatypeConverter;
  * @author ASUS
  */
 public class Giao_dien extends javax.swing.JFrame {
+    String file_type;
     private File inputEncryptFile;
     private File inputEncryptKey;
     private File inputDecryptFile;
@@ -382,7 +383,7 @@ public class Giao_dien extends javax.swing.JFrame {
             decryptAlgorithm.setInputKey(inputDecryptKey);
             byte[] encryptResult = decryptAlgorithm.decrypt();
             
-            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt.cm");
+            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt"+file_type);
             fs.write(encryptResult);
             fs.close();
             successful = true;
@@ -407,6 +408,7 @@ public class Giao_dien extends javax.swing.JFrame {
             e.printStackTrace();
         }
         file_path.setText(obj.sb2);
+        file_type = obj.sb3;
     }//GEN-LAST:event_open_fileActionPerformed
 
     private void open_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_keyActionPerformed
@@ -429,6 +431,7 @@ public class Giao_dien extends javax.swing.JFrame {
             e.printStackTrace();
         }
         file_path1.setText(obj.sb2);
+        file_type = obj.sb3;
     }//GEN-LAST:event_open_file1ActionPerformed
 
     private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
@@ -454,8 +457,8 @@ public class Giao_dien extends javax.swing.JFrame {
             encryptAlgorithm.setInputFile(inputEncryptFile);
             encryptAlgorithm.setInputKey(inputEncryptKey);
             byte[] encryptResult = encryptAlgorithm.encrypt();
-            
-            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt.cm");
+            JOptionPane.showMessageDialog(null, file_type);
+            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt"+file_type);
             fs.write(encryptResult);
             fs.close();
             successful = true;
