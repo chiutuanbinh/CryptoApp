@@ -33,5 +33,9 @@ public class HashAlgorithm {
         return md.digest(input);
     }
     
+    public byte[] run(byte[] input) throws Exception{
+        MessageDigest md = MessageDigest.getInstance(hashType);
+        return md.digest(input);
+    }
     
 }

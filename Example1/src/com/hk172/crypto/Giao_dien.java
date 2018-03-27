@@ -377,22 +377,31 @@ public class Giao_dien extends javax.swing.JFrame {
 
     private void Decrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrypt_buttonActionPerformed
         // TODO add your handling code here:
-        boolean successful = false;
+        String afterMessage = "Decrypt Success";
+        String hashCheck = "";
         try {            
             decryptAlgorithm.setInputFile(inputDecryptFile);
             decryptAlgorithm.setInputKey(inputDecryptKey);
-            byte[] encryptResult = decryptAlgorithm.decrypt();
+            byte[] decryptResult = decryptAlgorithm.decrypt();
+            
+            String hashString = hash_text1.getText();
+            byte[] hashResult = hashAlgorithm.run(decryptResult);
+            String hashResultString = DatatypeConverter.printHexBinary(hashResult);
+            if (hashString.equals(hashResultString)){
+                hashCheck = "Hash check success";
+            }
+            else if (!hashString.equals("")){
+                hashCheck = "Hash check failed";
+            }
             
             FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt"+file_type);
-            fs.write(encryptResult);
+            fs.write(decryptResult);
             fs.close();
-            successful = true;
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed");
+            afterMessage = "Decrypt Failed";
         }
-        if (successful)
-            JOptionPane.showMessageDialog(null, "Successful");
+        JOptionPane.showMessageDialog(null, afterMessage + "\n" + hashCheck);
     }//GEN-LAST:event_Decrypt_buttonActionPerformed
 
     private void file_path1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_path1ActionPerformed
@@ -447,27 +456,32 @@ public class Giao_dien extends javax.swing.JFrame {
 
     private void Encrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Encrypt_buttonActionPerformed
         // TODO add your handling code here:
-        boolean successful = false;
+        String afterMessage = "Encrypt Success";
         try {
+            jProgressBar1.setValue(0);
             
             hashAlgorithm.setInput(inputEncryptFile);
             byte[] hashResult = hashAlgorithm.run();
             hash_text.setText(DatatypeConverter.printHexBinary(hashResult));
             
+            jProgressBar1.setValue(25);
+            
             encryptAlgorithm.setInputFile(inputEncryptFile);
             encryptAlgorithm.setInputKey(inputEncryptKey);
             byte[] encryptResult = encryptAlgorithm.encrypt();
-            JOptionPane.showMessageDialog(null, file_type);
+            
+            jProgressBar1.setValue(75);
+            
+            //JOptionPane.showMessageDialog(null, file_type);
             FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt"+file_type);
             fs.write(encryptResult);
             fs.close();
-            successful = true;
+            jProgressBar1.setValue(100);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Failed");
+            afterMessage = "Encrypt Failed";
         }
-        if (successful)
-            JOptionPane.showMessageDialog(null, "Successful");
+        JOptionPane.showMessageDialog(null, afterMessage);
     }//GEN-LAST:event_Encrypt_buttonActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
