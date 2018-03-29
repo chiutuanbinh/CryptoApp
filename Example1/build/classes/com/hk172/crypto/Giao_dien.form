@@ -358,6 +358,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="file_path1">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="file_path1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="key_path1">
                 </Component>

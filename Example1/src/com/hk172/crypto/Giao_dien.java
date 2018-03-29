@@ -35,7 +35,6 @@ public class Giao_dien extends javax.swing.JFrame {
     private RSACrypto rSACrypto = new RSACrypto();
     
     
-    
     /**
      * Creates new form Giao_dien
      */
@@ -222,6 +221,12 @@ public class Giao_dien extends javax.swing.JFrame {
         jLabel5.setText("Chọn tập tin: ");
 
         jLabel6.setText("Chọn khóa: ");
+
+        file_path1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                file_path1ActionPerformed(evt);
+            }
+        });
 
         open_file1.setText("Browser");
         open_file1.addActionListener(new java.awt.event.ActionListener() {
@@ -620,6 +625,10 @@ public class Giao_dien extends javax.swing.JFrame {
     private void hash_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hash_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hash_textActionPerformed
+
+    private void file_path1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_path1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_file_path1ActionPerformed
 
     /**
      * @param args the command line arguments
