@@ -610,7 +610,7 @@ public class Giao_dien extends javax.swing.JFrame {
     }//GEN-LAST:event_keyGen_pathActionPerformed
 
     private void key_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key_saveActionPerformed
-
+           
     }//GEN-LAST:event_key_saveActionPerformed
 
     private void GenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateKeyActionPerformed
