@@ -10,10 +10,13 @@ import com.hk172.crypto.algorithm.CryptoAlgorithm;
 import com.hk172.crypto.algorithm.DESCrypto;
 import com.hk172.crypto.algorithm.HashAlgorithm;
 import com.hk172.crypto.algorithm.RSACrypto;
+import com.hk172.crypto.keygen.DESKeyGen;
+import com.hk172.crypto.keygen.KeyGen;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.xml.bind.DatatypeConverter;
 
@@ -33,6 +36,9 @@ public class Giao_dien extends javax.swing.JFrame {
     private DESCrypto dESCrypto = new DESCrypto();
     private AESCrypto aESCrypto = new AESCrypto();
     private RSACrypto rSACrypto = new RSACrypto();
+    
+    private KeyGen DESKey = new DESKeyGen();
+    
     /**
      * Creates new form Giao_dien
      */
@@ -100,12 +106,6 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel2.setText("Chọn khóa: ");
 
-        file_path.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                file_pathActionPerformed(evt);
-            }
-        });
-
         open_file.setText("Browser");
         open_file.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +129,7 @@ public class Giao_dien extends javax.swing.JFrame {
             }
         });
 
-        percent_.setText("100%");
+        percent_.setText("0%");
 
         Encrypt_button.setText("Encrypt");
         Encrypt_button.addActionListener(new java.awt.event.ActionListener() {
@@ -226,12 +226,6 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel6.setText("Chọn khóa: ");
 
-        file_path1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                file_path1ActionPerformed(evt);
-            }
-        });
-
         open_file1.setText("Browser");
         open_file1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +249,7 @@ public class Giao_dien extends javax.swing.JFrame {
             }
         });
 
-        percent_1.setText("100%");
+        percent_1.setText("0%");
 
         Decrypt_button.setText("Decrypt");
         Decrypt_button.addActionListener(new java.awt.event.ActionListener() {
@@ -458,21 +452,25 @@ public class Giao_dien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void file_pathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_pathActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_file_pathActionPerformed
-
     private void Decrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrypt_buttonActionPerformed
         // TODO add your handling code here:
         String afterMessage = "Decrypt Success";
         String hashCheck = "";
-        try {            
+        
+        
+        try {          
+            jProgressBar2.setValue(0);
+            percent_1.setText("0%");
             decryptAlgorithm.setInputFile(inputDecryptFile);
             decryptAlgorithm.setInputKey(inputDecryptKey);
             byte[] decryptResult = decryptAlgorithm.decrypt();
             
+            jProgressBar2.setValue(25);
+            percent_1.setText("25%");
             String hashString = hash_text1.getText();
             byte[] hashResult = hashAlgorithm.run(decryptResult);
+            
+            
             String hashResultString = DatatypeConverter.printHexBinary(hashResult);
             if (hashString.equals(hashResultString)){
                 hashCheck = "Hash check success";
@@ -482,18 +480,21 @@ public class Giao_dien extends javax.swing.JFrame {
             }
             
             FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt_"+file_name);
+            jProgressBar2.setValue(50);
+            percent_1.setText("50%");
+            
             fs.write(decryptResult);
             fs.close();
+            jProgressBar2.setValue(100);
+            percent_1.setText("100%");
         } catch (Exception e) {
             e.printStackTrace();
             afterMessage = "Decrypt Failed";
         }
         JOptionPane.showMessageDialog(null, afterMessage + "\n" + hashCheck);
+        jProgressBar2.setValue(0);
+        percent_1.setText("0%");
     }//GEN-LAST:event_Decrypt_buttonActionPerformed
-
-    private void file_path1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_path1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_file_path1ActionPerformed
 
     private void open_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_fileActionPerformed
         // TODO add your handling code here:
@@ -546,29 +547,32 @@ public class Giao_dien extends javax.swing.JFrame {
         String afterMessage = "Encrypt Success";
         try {
             jProgressBar1.setValue(0);
-            
+            percent_.setText("0%");
             hashAlgorithm.setInput(inputEncryptFile);
             byte[] hashResult = hashAlgorithm.run();
             hash_text.setText(DatatypeConverter.printHexBinary(hashResult));
             
             jProgressBar1.setValue(25);
-            
+            percent_.setText("25%");
             encryptAlgorithm.setInputFile(inputEncryptFile);
             encryptAlgorithm.setInputKey(inputEncryptKey);
             byte[] encryptResult = encryptAlgorithm.encrypt();
             
             jProgressBar1.setValue(75);
-            
+            percent_.setText("75%");
             //JOptionPane.showMessageDialog(null, file_type);
             FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt_"+file_name);
             fs.write(encryptResult);
             fs.close();
             jProgressBar1.setValue(100);
+            percent_.setText("100%");
         } catch (Exception e) {
             e.printStackTrace();
             afterMessage = "Encrypt Failed";
         }
         JOptionPane.showMessageDialog(null, afterMessage);
+        jProgressBar1.setValue(0);
+        percent_.setText("0%");
     }//GEN-LAST:event_Encrypt_buttonActionPerformed
 
     private void ComboBox_encryptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBox_encryptItemStateChanged
@@ -610,8 +614,15 @@ public class Giao_dien extends javax.swing.JFrame {
     }//GEN-LAST:event_keyGen_pathActionPerformed
 
     private void key_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key_saveActionPerformed
-        //JFileChooser file_chooser = new JFileChooser();
-        //chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        JFileChooser save = new JFileChooser();
+        save.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (save.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+            
+            keyGen_path.setText(save.getSelectedFile().getAbsolutePath());
+        }
+        DESKey.writeToFile(keyGen_path.getText());
+        
     }//GEN-LAST:event_key_saveActionPerformed
 
     private void GenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateKeyActionPerformed
@@ -652,7 +663,9 @@ public class Giao_dien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Giao_dien().setVisible(true);
+                JFrame mainFrame = new Giao_dien();
+                mainFrame.setResizable(false);
+                mainFrame.setVisible(true);
             }
         });
     }
