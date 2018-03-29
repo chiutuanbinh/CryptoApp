@@ -25,7 +25,8 @@ public class open_file {
             returnFile = file_chooser.getSelectedFile();
             sb2 = returnFile.getPath();
             filename = returnFile.getName();
-            sb3 = filename.substring(filename.lastIndexOf("."),filename.length());
+            //sb3 = filename.substring(filename.lastIndexOf("."),filename.length());
+            
             try (Scanner input = new Scanner(returnFile)) {
                 while (input.hasNext()){
                     sb1.append(input.nextLine());

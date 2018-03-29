@@ -13,6 +13,7 @@ import com.hk172.crypto.algorithm.RSACrypto;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.xml.bind.DatatypeConverter;
 
@@ -21,7 +22,7 @@ import javax.xml.bind.DatatypeConverter;
  * @author ASUS
  */
 public class Giao_dien extends javax.swing.JFrame {
-    String file_type;
+    String file_name;
     private File inputEncryptFile;
     private File inputEncryptKey;
     private File inputDecryptFile;
@@ -480,7 +481,7 @@ public class Giao_dien extends javax.swing.JFrame {
                 hashCheck = "Hash check failed";
             }
             
-            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt"+file_type);
+            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt_"+file_name);
             fs.write(decryptResult);
             fs.close();
         } catch (Exception e) {
@@ -503,7 +504,7 @@ public class Giao_dien extends javax.swing.JFrame {
             e.printStackTrace();
         }
         file_path.setText(obj.sb2);
-        file_type = obj.sb3;
+        file_name = obj.filename;
     }//GEN-LAST:event_open_fileActionPerformed
 
     private void open_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_keyActionPerformed
@@ -526,7 +527,7 @@ public class Giao_dien extends javax.swing.JFrame {
             e.printStackTrace();
         }
         file_path1.setText(obj.sb2);
-        file_type = obj.sb3;
+        file_name = obj.filename;
     }//GEN-LAST:event_open_file1ActionPerformed
 
     private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
@@ -559,7 +560,7 @@ public class Giao_dien extends javax.swing.JFrame {
             jProgressBar1.setValue(75);
             
             //JOptionPane.showMessageDialog(null, file_type);
-            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt"+file_type);
+            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt_"+file_name);
             fs.write(encryptResult);
             fs.close();
             jProgressBar1.setValue(100);
@@ -609,7 +610,8 @@ public class Giao_dien extends javax.swing.JFrame {
     }//GEN-LAST:event_keyGen_pathActionPerformed
 
     private void key_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key_saveActionPerformed
-
+        //JFileChooser file_chooser = new JFileChooser();
+        //chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     }//GEN-LAST:event_key_saveActionPerformed
 
     private void GenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateKeyActionPerformed
