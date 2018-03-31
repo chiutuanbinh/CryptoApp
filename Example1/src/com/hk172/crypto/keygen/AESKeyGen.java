@@ -21,7 +21,7 @@ import javax.xml.bind.DatatypeConverter;
  */
 public class AESKeyGen implements KeyGen{
     private KeyGenerator keygen ;
-    private final int keyLength = 32;
+    private final int keyLength = 256;
     public AESKeyGen() {
         try {
             keygen = KeyGenerator.getInstance("AES");
@@ -40,12 +40,12 @@ public class AESKeyGen implements KeyGen{
             fw = new FileWriter(file);
             fw.write(skeyString);
         } catch (IOException ex) {
-            Logger.getLogger(DESKeyGen.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
             try {
                 fw.close();
             } catch (IOException ex) {
-                Logger.getLogger(DESKeyGen.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }

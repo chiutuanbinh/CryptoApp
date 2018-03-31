@@ -10,9 +10,14 @@ import com.hk172.crypto.algorithm.CryptoAlgorithm;
 import com.hk172.crypto.algorithm.DESCrypto;
 import com.hk172.crypto.algorithm.HashAlgorithm;
 import com.hk172.crypto.algorithm.RSACrypto;
+import com.hk172.crypto.keygen.AESKeyGen;
+import com.hk172.crypto.keygen.DESKeyGen;
+import com.hk172.crypto.keygen.KeyGen;
+import com.hk172.crypto.keygen.RSAKeyGen;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.io.FileOutputStream;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.xml.bind.DatatypeConverter;
@@ -22,7 +27,7 @@ import javax.xml.bind.DatatypeConverter;
  * @author ASUS
  */
 public class Giao_dien extends javax.swing.JFrame {
-    String file_type;
+    String file_name;
     private File inputEncryptFile;
     private File inputEncryptKey;
     private File inputDecryptFile;
@@ -33,7 +38,11 @@ public class Giao_dien extends javax.swing.JFrame {
     private DESCrypto dESCrypto = new DESCrypto();
     private AESCrypto aESCrypto = new AESCrypto();
     private RSACrypto rSACrypto = new RSACrypto();
-    
+
+    private KeyGen keyGen ;
+    private KeyGen DESKey = new DESKeyGen();
+    private KeyGen AESKey = new AESKeyGen();
+    private KeyGen RSAKey = new RSAKeyGen();
     
     /**
      * Creates new form Giao_dien
@@ -43,6 +52,7 @@ public class Giao_dien extends javax.swing.JFrame {
         this.hashAlgorithm.setHashType("MD5");
         encryptAlgorithm = dESCrypto;
         decryptAlgorithm = dESCrypto;
+        keyGen = DESKey;
         
     }
     
@@ -379,7 +389,7 @@ public class Giao_dien extends javax.swing.JFrame {
             }
         });
 
-        percent_keyGen.setText("100%");
+        percent_keyGen.setText("0%");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -481,9 +491,10 @@ public class Giao_dien extends javax.swing.JFrame {
                 hashCheck = "Hash check failed";
             }
             
+            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt_"+file_name);
             jProgressBar2.setValue(50);
             percent_1.setText("50%");
-            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt"+file_type);
+            
             fs.write(decryptResult);
             fs.close();
             jProgressBar2.setValue(100);
@@ -506,7 +517,7 @@ public class Giao_dien extends javax.swing.JFrame {
             e.printStackTrace();
         }
         file_path.setText(obj.sb2);
-        file_type = obj.sb3;
+        file_name = obj.filename;
     }//GEN-LAST:event_open_fileActionPerformed
 
     private void open_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_keyActionPerformed
@@ -529,7 +540,7 @@ public class Giao_dien extends javax.swing.JFrame {
             e.printStackTrace();
         }
         file_path1.setText(obj.sb2);
-        file_type = obj.sb3;
+        file_name = obj.filename;
     }//GEN-LAST:event_open_file1ActionPerformed
 
     private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
@@ -562,7 +573,7 @@ public class Giao_dien extends javax.swing.JFrame {
             jProgressBar1.setValue(75);
             percent_.setText("75%");
             //JOptionPane.showMessageDialog(null, file_type);
-            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt"+file_type);
+            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt_"+file_name);
             fs.write(encryptResult);
             fs.close();
             jProgressBar1.setValue(100);
@@ -608,6 +619,17 @@ public class Giao_dien extends javax.swing.JFrame {
 
     private void method_keyGenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_method_keyGenItemStateChanged
         // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED){
+            String selectedItem = method_keyGen.getSelectedItem().toString();
+            if (selectedItem.equals("DES"))
+                keyGen = DESKey;
+            if (selectedItem.equals("AES"))
+                keyGen = AESKey;
+            if (selectedItem.equals("RSA"))
+                keyGen = RSAKey;
+        }
+        else 
+            return;
     }//GEN-LAST:event_method_keyGenItemStateChanged
 
     private void keyGen_pathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyGen_pathActionPerformed
@@ -615,11 +637,19 @@ public class Giao_dien extends javax.swing.JFrame {
     }//GEN-LAST:event_keyGen_pathActionPerformed
 
     private void key_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key_saveActionPerformed
-           
+
+        JFileChooser save = new JFileChooser();
+        save.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (save.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+            
+            keyGen_path.setText(save.getSelectedFile().getAbsolutePath());
+        }
+        
     }//GEN-LAST:event_key_saveActionPerformed
 
     private void GenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateKeyActionPerformed
         // TODO add your handling code here:
+        keyGen.writeToFile(keyGen_path.getText());
     }//GEN-LAST:event_GenerateKeyActionPerformed
 
     private void hash_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hash_textActionPerformed

@@ -16,6 +16,7 @@ import java.security.MessageDigest;
 public class HashAlgorithm {
     protected File input;
     protected String hashType;
+    protected final int BUFF_SIZE = 1048576;
     public void setInput(File input){
         this.input = input ;
     }

@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/hk172/MMANM/CryptoApp/Example1/src/com/hk172/crypto/open_file.java</file>
-            <file>file:/G:/hk172/MMANM/CryptoApp/Example1/src/com/hk172/crypto/Giao_dien.java</file>
+            <file>file:/home/binhchiu/NetBeansProjects/CryptoApp/Example1/src/com/hk172/crypto/algorithm/RSACrypto.java</file>
+            <file>file:/home/binhchiu/NetBeansProjects/CryptoApp/Example1/src/com/hk172/crypto/keygen/DESKeyGen.java</file>
+            <file>file:/home/binhchiu/NetBeansProjects/CryptoApp/Example1/src/com/hk172/crypto/Giao_dien.java</file>
+            <file>file:/home/binhchiu/NetBeansProjects/CryptoApp/Example1/src/com/hk172/crypto/keygen/RSAKeyGen.java</file>
+            <file>file:/home/binhchiu/NetBeansProjects/CryptoApp/Example1/src/com/hk172/crypto/keygen/AESKeyGen.java</file>
         </group>
     </open-files>
 </project-private>

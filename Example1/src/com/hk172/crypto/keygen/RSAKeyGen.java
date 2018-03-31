@@ -6,6 +6,7 @@
 package com.hk172.crypto.keygen;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.KeyPair;
@@ -24,11 +25,11 @@ import javax.xml.bind.DatatypeConverter;
  */
 public class RSAKeyGen implements KeyGen{
     private KeyPairGenerator kpg;
-    private int keyLength = 512;
+    private int keyLength = 2048;
 
     public RSAKeyGen() {
         try {
-            KeyPairGenerator.getInstance("RSA");
+            kpg = KeyPairGenerator.getInstance("RSA");
         } catch (NoSuchAlgorithmException ex) {
             ex.printStackTrace();
         }
@@ -38,24 +39,36 @@ public class RSAKeyGen implements KeyGen{
     
     @Override
     public void writeToFile(String path) {
+        FileWriter fw = null;
+        FileWriter fw1 = null;
         try {
             KeyPair kp = genKeyPair();
-            String publicKey = DatatypeConverter.printBase64Binary(kp.getPublic().getEncoded());
-            String privateKey = DatatypeConverter.printBase64Binary(kp.getPrivate().getEncoded());
+            byte[] publicKey = kp.getPublic().getEncoded();
+            byte[] privateKey = kp.getPrivate().getEncoded();
             
-            File publicKeyFile = new File( path + "\\publicKey.txt");
-            File privateKeyFile = new File(path + "\\privateKey.txt");
             
-            FileWriter fw = new FileWriter(publicKeyFile);
-            fw.write(publicKey);
-            fw.close();
             
-            FileWriter fw1 = new FileWriter(privateKeyFile);
-            fw1.write(privateKey);
-            fw1.close();
+            File publicKeyFile = new File(path + "//publicKey.txt");
+            File privateKeyFile = new File(path + "//privateKey.txt");
+            
+            fw = new FileWriter(publicKeyFile);
+            fw.write(DatatypeConverter.printBase64Binary(publicKey));
+            System.out.println(publicKeyFile);
+            
+            fw1 = new FileWriter(privateKeyFile);
+            fw1.write(DatatypeConverter.printBase64Binary(privateKey));
+            
         } catch (IOException ex) {
             ex.printStackTrace();
+        } finally{
+            try {
+                fw.close();
+                fw1.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
+        
         
     }
     
