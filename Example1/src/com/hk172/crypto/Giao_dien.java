@@ -232,12 +232,6 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel6.setText("Chọn khóa: ");
 
-        file_path1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                file_path1ActionPerformed(evt);
-            }
-        });
-
         open_file1.setText("Browser");
         open_file1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,9 +288,9 @@ public class Giao_dien extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(key_path1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(open_file1)
-                            .addComponent(open_key1)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(open_key1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(open_file1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +304,7 @@ public class Giao_dien extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(22, 22, 22))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +326,7 @@ public class Giao_dien extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(hash_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(percent_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,14 +340,14 @@ public class Giao_dien extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 569, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 13, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Decrypt", jPanel2);
@@ -464,50 +458,6 @@ public class Giao_dien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Decrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrypt_buttonActionPerformed
-        // TODO add your handling code here:
-        String afterMessage = "Decrypt Success";
-        String hashCheck = "";
-        
-        
-        try {          
-            jProgressBar2.setValue(0);
-            percent_1.setText("0%");
-            decryptAlgorithm.setInputFile(inputDecryptFile);
-            decryptAlgorithm.setInputKey(inputDecryptKey);
-            byte[] decryptResult = decryptAlgorithm.decrypt();
-            
-            jProgressBar2.setValue(25);
-            percent_1.setText("25%");
-            String hashString = hash_text1.getText();
-            byte[] hashResult = hashAlgorithm.run(decryptResult);
-            
-            
-            String hashResultString = DatatypeConverter.printHexBinary(hashResult);
-            if (hashString.equals(hashResultString)){
-                hashCheck = "Hash check success";
-            }
-            else if (!hashString.equals("")){
-                hashCheck = "Hash check failed";
-            }
-            
-            FileOutputStream fs = new FileOutputStream(inputDecryptFile.getParent() + "//decrypt_"+file_name);
-            jProgressBar2.setValue(50);
-            percent_1.setText("50%");
-            
-            fs.write(decryptResult);
-            fs.close();
-            jProgressBar2.setValue(100);
-            percent_1.setText("100%");
-        } catch (Exception e) {
-            e.printStackTrace();
-            afterMessage = "Decrypt Failed";
-        }
-        JOptionPane.showMessageDialog(null, afterMessage + "\n" + hashCheck);
-        jProgressBar2.setValue(0);
-        percent_1.setText("0%");
-    }//GEN-LAST:event_Decrypt_buttonActionPerformed
-
     private void open_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_fileActionPerformed
         // TODO add your handling code here:
         open_file obj= new open_file();
@@ -531,57 +481,20 @@ public class Giao_dien extends javax.swing.JFrame {
         key_path.setText(obj.sb2);
     }//GEN-LAST:event_open_keyActionPerformed
 
-    private void open_file1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_file1ActionPerformed
-        // TODO add your handling code here:
-        open_file obj= new open_file();
-        try {
-            inputDecryptFile = obj.pick_me();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        file_path1.setText(obj.sb2);
-        file_name = obj.filename;
-    }//GEN-LAST:event_open_file1ActionPerformed
-
-    private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
-        // TODO add your handling code here:
-        open_file obj= new open_file();
-        try {
-            inputDecryptKey = obj.pick_me();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        key_path1.setText(obj.sb2);
-    }//GEN-LAST:event_open_key1ActionPerformed
-
     private void Encrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Encrypt_buttonActionPerformed
         // TODO add your handling code here:
         String afterMessage = "Encrypt Success";
         try {
-            jProgressBar1.setValue(0);
-            percent_.setText("0%");
-            hashAlgorithm.setInput(inputEncryptFile);
-            byte[] hashResult = hashAlgorithm.run();
-            hash_text.setText(DatatypeConverter.printHexBinary(hashResult));
-            
-            jProgressBar1.setValue(25);
-            percent_.setText("25%");
             encryptAlgorithm.setInputFile(inputEncryptFile);
             encryptAlgorithm.setInputKey(inputEncryptKey);
-            byte[] encryptResult = encryptAlgorithm.encrypt();
+
+            encryptAlgorithm.encrypt(inputEncryptFile.getParent() + "//encrypt2_" + file_name, jProgressBar1, hashAlgorithm);       
             
-            jProgressBar1.setValue(75);
-            percent_.setText("75%");
-            //JOptionPane.showMessageDialog(null, file_type);
-            FileOutputStream fs = new FileOutputStream(inputEncryptFile.getParent() + "//encrypt_"+file_name);
-            fs.write(encryptResult);
-            fs.close();
-            jProgressBar1.setValue(100);
-            percent_.setText("100%");
         } catch (Exception e) {
             e.printStackTrace();
             afterMessage = "Encrypt Failed";
         }
+        hash_text.setText(DatatypeConverter.printHexBinary(hashAlgorithm.executeHash()));
         JOptionPane.showMessageDialog(null, afterMessage);
         jProgressBar1.setValue(0);
         percent_.setText("0%");
@@ -601,21 +514,6 @@ public class Giao_dien extends javax.swing.JFrame {
         else 
             return;
     }//GEN-LAST:event_ComboBox_encryptItemStateChanged
-
-    private void ComboBox_decryptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBox_decryptItemStateChanged
-        // TODO add your handling code here:
-        if (evt.getStateChange() == ItemEvent.SELECTED){
-            String selectedItem = ComboBox_decrypt.getSelectedItem().toString();
-            if (selectedItem.equals("DES"))
-                decryptAlgorithm = dESCrypto;
-            if (selectedItem.equals("AES"))
-                decryptAlgorithm = aESCrypto;
-            if (selectedItem.equals("RSA"))
-                decryptAlgorithm = rSACrypto;
-        }
-        else 
-            return;
-    }//GEN-LAST:event_ComboBox_decryptItemStateChanged
 
     private void method_keyGenItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_method_keyGenItemStateChanged
         // TODO add your handling code here:
@@ -656,9 +554,78 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_hash_textActionPerformed
 
-    private void file_path1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_path1ActionPerformed
+    private void Decrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrypt_buttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_file_path1ActionPerformed
+        String afterMessage = "Decrypt Success";
+        String hashCheck = "";
+
+        try {
+            decryptAlgorithm.setInputFile(inputDecryptFile);
+            decryptAlgorithm.setInputKey(inputDecryptKey);
+
+            decryptAlgorithm.decrypt(inputDecryptFile.getParent() + "//decrypt2_" + file_name, jProgressBar2, hashAlgorithm);
+            
+            String hashString = hash_text1.getText();
+            byte[] hashResult = hashAlgorithm.executeHash();
+
+            String hashResultString = DatatypeConverter.printHexBinary(hashResult);
+            System.out.println(hashResultString);
+            if (hashString.equals(hashResultString)){
+                hashCheck = "Hash check success";
+            }
+            else if (!hashString.equals("")){
+                hashCheck = "Hash check failed";
+            }
+
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            afterMessage = "Decrypt Failed";
+        }
+        JOptionPane.showMessageDialog(null, afterMessage + "\n" + hashCheck);
+        jProgressBar2.setValue(0);
+        percent_1.setText("0%");
+    }//GEN-LAST:event_Decrypt_buttonActionPerformed
+
+    private void ComboBox_decryptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBox_decryptItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED){
+            String selectedItem = ComboBox_decrypt.getSelectedItem().toString();
+            if (selectedItem.equals("DES"))
+            decryptAlgorithm = dESCrypto;
+            if (selectedItem.equals("AES"))
+            decryptAlgorithm = aESCrypto;
+            if (selectedItem.equals("RSA"))
+            decryptAlgorithm = rSACrypto;
+        }
+        else
+        return;
+    }//GEN-LAST:event_ComboBox_decryptItemStateChanged
+
+    private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
+        // TODO add your handling code here:
+        open_file obj= new open_file();
+        try {
+            inputDecryptKey = obj.pick_me();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        key_path1.setText(obj.sb2);
+    }//GEN-LAST:event_open_key1ActionPerformed
+
+    private void open_file1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_file1ActionPerformed
+        // TODO add your handling code here:
+        open_file obj= new open_file();
+        try {
+            inputDecryptFile = obj.pick_me();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        file_path1.setText(obj.sb2);
+        file_name = obj.filename;
+    }//GEN-LAST:event_open_file1ActionPerformed
 
     /**
      * @param args the command line arguments

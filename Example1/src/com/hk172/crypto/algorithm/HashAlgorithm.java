@@ -8,6 +8,9 @@ package com.hk172.crypto.algorithm;
 import java.io.File;
 import java.nio.file.Files;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,9 +19,10 @@ import java.security.MessageDigest;
 public class HashAlgorithm {
     protected File input;
     protected String hashType;
-    protected final int BUFF_SIZE = 1048576;
+    MessageDigest md = null;
     public void setInput(File input){
         this.input = input ;
+        
     }
     private byte[] readFile() throws Exception{
         return Files.readAllBytes(input.toPath());
@@ -26,17 +30,28 @@ public class HashAlgorithm {
 
     public void setHashType(String hashType){
         this.hashType = hashType;
+        try {
+            md = MessageDigest.getInstance(hashType);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(HashAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public byte[] run() throws Exception {
         byte[] input = readFile();
-        MessageDigest md = MessageDigest.getInstance(hashType);
         return md.digest(input);
     }
     
     public byte[] run(byte[] input) throws Exception{
-        MessageDigest md = MessageDigest.getInstance(hashType);
+        
         return md.digest(input);
+    }
+    
+    public void append(byte[] nextblock) {
+        md.update(nextblock);
+    }
+    public byte[] executeHash(){
+        return md.digest();
     }
     
 }

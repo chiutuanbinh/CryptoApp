@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import javax.swing.JProgressBar;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -28,7 +29,6 @@ public abstract class CryptoAlgorithm {
     protected byte[] readKey(File file) throws Exception{
         FileInputStream fs = new FileInputStream(file);
         BufferedReader br = new BufferedReader(new InputStreamReader(fs));
-        
         String key = br.readLine();
         return DatatypeConverter.parseHexBinary(key);
     }
@@ -51,4 +51,14 @@ public abstract class CryptoAlgorithm {
     
     public abstract byte[] encrypt() throws Exception;
     public abstract byte[] decrypt() throws Exception;
+    /**
+     * Executing the process encrypting the file, get the hash, and save to file,
+     * Showing according progress to a bar
+     * @param path the path of the encrypt file
+     * @param progressBar the progress bar of encrypting op
+     * @param hashFunc the hashFunc
+     * @throws Exception if file not found, or Function not found
+     */
+    public abstract void encrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception;
+    public abstract void decrypt (String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception;
 }

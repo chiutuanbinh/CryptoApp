@@ -21,7 +21,7 @@ import javax.xml.bind.DatatypeConverter;
  */
 public class AESKeyGen implements KeyGen{
     private KeyGenerator keygen ;
-    private final int keyLength = 256;
+    private final int keyLength = 128;
     public AESKeyGen() {
         try {
             keygen = KeyGenerator.getInstance("AES");
