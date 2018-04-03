@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -21,6 +22,7 @@ import javax.xml.bind.DatatypeConverter;
 public abstract class CryptoAlgorithm {
     protected File inputFile;
     protected File inputKey;
+    
     
     protected byte[] readFile(File file) throws IOException{
         return Files.readAllBytes(file.toPath());
@@ -49,8 +51,7 @@ public abstract class CryptoAlgorithm {
         this.inputKey = key;
     }
     
-    public abstract byte[] encrypt() throws Exception;
-    public abstract byte[] decrypt() throws Exception;
+    
     /**
      * Executing the process encrypting the file, get the hash, and save to file,
      * Showing according progress to a bar
@@ -61,4 +62,5 @@ public abstract class CryptoAlgorithm {
      */
     public abstract void encrypt(String path) throws Exception;
     public abstract void decrypt (String path) throws Exception;
+   
 }

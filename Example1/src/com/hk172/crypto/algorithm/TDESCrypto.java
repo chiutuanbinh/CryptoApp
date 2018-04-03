@@ -7,50 +7,36 @@ package com.hk172.crypto.algorithm;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.Arrays;
 import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
-import javax.swing.JProgressBar;
+import javax.crypto.spec.DESedeKeySpec;
 
 /**
  *
  * @author binhchiu
  */
-public class DESCrypto extends CryptoAlgorithm{
+public class TDESCrypto extends CryptoAlgorithm{
     
     private SecretKeyFactory factory ;
     private Cipher encryptCipher ;
     private Cipher decryptCipher ;
     private final int BUFF_SIZE = 8192;
     
-    public DESCrypto(){
+    public TDESCrypto(){
         super();
         try {
-            factory = SecretKeyFactory.getInstance("DES");
-            encryptCipher = Cipher.getInstance("DES");
-            decryptCipher = Cipher.getInstance("DES");
+            factory = SecretKeyFactory.getInstance("DESede");
+            encryptCipher = Cipher.getInstance("DESede");
+            decryptCipher = Cipher.getInstance("DESede");
         } catch (Exception e) {
             e.printStackTrace();
         }
         
     }
     
-    @Override
-    public byte[] encrypt() throws Exception {
-        byte[] input = readFile(inputFile);
-        byte[] key = readKey(inputKey);
-        
-        SecretKey skey = factory.generateSecret(new DESKeySpec(key));
-        encryptCipher.init(Cipher.ENCRYPT_MODE, skey);
-        //System.out.println(encryptCipher.getBlockSize());
-        
-        return encryptCipher.doFinal(input);
-        
-    }
 
     @Override
     public void encrypt(String path) throws Exception {
@@ -60,7 +46,7 @@ public class DESCrypto extends CryptoAlgorithm{
         FileInputStream fs = new FileInputStream(inputFile);
         FileOutputStream fos = new FileOutputStream(path);
         //parse the key, init the cipher
-        SecretKey skey = factory.generateSecret(new DESKeySpec(key));
+        SecretKey skey = factory.generateSecret(new DESedeKeySpec(key));
         encryptCipher.init(Cipher.ENCRYPT_MODE, skey);
         byte[] inputBuffer = new byte[BUFF_SIZE];
         //wrap the fos stream
@@ -73,29 +59,14 @@ public class DESCrypto extends CryptoAlgorithm{
         while (read < offset) {
             unitsize = (int) (((offset - read) >= BUFF_SIZE) ? BUFF_SIZE : (offset - read));
             
-//            System.out.println(unitsize);
             fs.read(inputBuffer, 0, unitsize);
             cos.write(inputBuffer,0, unitsize);
             
             read += unitsize;
         }
-//        System.out.println((int)read/offset);
-//        System.out.println(offset);
         cos.close();
     }
     
-    
-    
-    @Override
-    public byte[] decrypt() throws Exception {
-        byte[] input = readFile(inputFile);
-        byte[] key = readKey(inputKey);
-        SecretKey sKey = factory.generateSecret(new DESKeySpec(key));
-        decryptCipher.init(Cipher.DECRYPT_MODE, sKey);
-        
-        return decryptCipher.doFinal(input);
-    }
-
     @Override
     public void decrypt(String path) throws Exception {
         //get the key
@@ -105,7 +76,7 @@ public class DESCrypto extends CryptoAlgorithm{
         FileInputStream fs = new FileInputStream(inputFile);
         FileOutputStream fos = new FileOutputStream(path);
         //prepare the key
-        SecretKey skey = factory.generateSecret(new DESKeySpec(key));
+        SecretKey skey = factory.generateSecret(new DESedeKeySpec(key));
         decryptCipher.init(Cipher.DECRYPT_MODE, skey);
         
         //wrap the fos into a cipherstream
@@ -124,7 +95,6 @@ public class DESCrypto extends CryptoAlgorithm{
             fs.read(inputBuffer,0,unitsize);
             
             cos.write(inputBuffer, 0, unitsize);
-            System.out.println(unitsize);
             read += unitsize;
         }
         cos.close();

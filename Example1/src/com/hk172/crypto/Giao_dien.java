@@ -6,12 +6,14 @@
 package com.hk172.crypto;
 
 import com.hk172.crypto.algorithm.AESCrypto;
+import com.hk172.crypto.algorithm.BlowFishCrypto;
 import com.hk172.crypto.algorithm.CryptoAlgorithm;
-import com.hk172.crypto.algorithm.DESCrypto;
+import com.hk172.crypto.algorithm.TDESCrypto;
 import com.hk172.crypto.algorithm.HashAlgorithm;
 import com.hk172.crypto.algorithm.RSACrypto;
 import com.hk172.crypto.keygen.AESKeyGen;
-import com.hk172.crypto.keygen.DESKeyGen;
+import com.hk172.crypto.keygen.BlowFishKeyGen;
+import com.hk172.crypto.keygen.TDESKeyGen;
 import com.hk172.crypto.keygen.KeyGen;
 import com.hk172.crypto.keygen.RSAKeyGen;
 import java.awt.event.ItemEvent;
@@ -32,24 +34,25 @@ public class Giao_dien extends javax.swing.JFrame {
     private File inputEncryptKey;
     private File inputDecryptFile;
     private File inputDecryptKey;
-    private HashAlgorithm hashAlgorithm = new HashAlgorithm();
+
     private CryptoAlgorithm encryptAlgorithm;
     private CryptoAlgorithm decryptAlgorithm;
-    private DESCrypto dESCrypto = new DESCrypto();
+    private TDESCrypto dESCrypto = new TDESCrypto();
     private AESCrypto aESCrypto = new AESCrypto();
     private RSACrypto rSACrypto = new RSACrypto();
+    private BlowFishCrypto BFCrypto = new BlowFishCrypto();
 
     private KeyGen keyGen ;
-    private KeyGen DESKey = new DESKeyGen();
+    private KeyGen DESKey = new TDESKeyGen();
     private KeyGen AESKey = new AESKeyGen();
     private KeyGen RSAKey = new RSAKeyGen();
+    private KeyGen BlowFishKeyGen = new BlowFishKeyGen();
     
     /**
      * Creates new form Giao_dien
      */
     public Giao_dien() {
         initComponents();
-        this.hashAlgorithm.setHashType("MD5");
         encryptAlgorithm = dESCrypto;
         decryptAlgorithm = dESCrypto;
         keyGen = DESKey;
@@ -76,8 +79,6 @@ public class Giao_dien extends javax.swing.JFrame {
         open_key = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         ComboBox_encrypt = new javax.swing.JComboBox<>();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        percent_ = new javax.swing.JTextField();
         Encrypt_button = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         hash_text = new javax.swing.JTextField();
@@ -91,8 +92,6 @@ public class Giao_dien extends javax.swing.JFrame {
         open_key1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         ComboBox_decrypt = new javax.swing.JComboBox<>();
-        jProgressBar2 = new javax.swing.JProgressBar();
-        percent_1 = new javax.swing.JTextField();
         Decrypt_button = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         hash_text1 = new javax.swing.JTextField();
@@ -103,8 +102,6 @@ public class Giao_dien extends javax.swing.JFrame {
         keyGen_path = new javax.swing.JTextField();
         key_save = new javax.swing.JButton();
         GenerateKey = new javax.swing.JButton();
-        ProgressBar_keyGen = new javax.swing.JProgressBar();
-        percent_keyGen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,14 +125,12 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel3.setText("Chọn phương thức mã hóa: ");
 
-        ComboBox_encrypt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DES", "AES", "RSA" }));
+        ComboBox_encrypt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TDES", "AES", "RSA", "BlowFish" }));
         ComboBox_encrypt.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboBox_encryptItemStateChanged(evt);
             }
         });
-
-        percent_.setText("0%");
 
         Encrypt_button.setText("Encrypt");
         Encrypt_button.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +158,7 @@ public class Giao_dien extends javax.swing.JFrame {
                 .addComponent(hash_text, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(Encrypt_button)
@@ -188,13 +183,7 @@ public class Giao_dien extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(open_file)
                                     .addComponent(open_key))))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(percent_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(257, 257, 257))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,11 +202,7 @@ public class Giao_dien extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(ComboBox_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(percent_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(109, 109, 109)
                 .addComponent(Encrypt_button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -248,14 +233,12 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel7.setText("CHọn phương thức giải mã: ");
 
-        ComboBox_decrypt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DES", "AES", "RSA" }));
+        ComboBox_decrypt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TDES", "AES", "RSA", "BlowFish" }));
         ComboBox_decrypt.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboBox_decryptItemStateChanged(evt);
             }
         });
-
-        percent_1.setText("0%");
 
         Decrypt_button.setText("Decrypt");
         Decrypt_button.addActionListener(new java.awt.event.ActionListener() {
@@ -296,14 +279,8 @@ public class Giao_dien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hash_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(percent_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
-                        .addComponent(Decrypt_button))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Decrypt_button)))
                 .addGap(22, 22, 22))
         );
         jPanel3Layout.setVerticalGroup(
@@ -326,11 +303,7 @@ public class Giao_dien extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(hash_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(percent_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(Decrypt_button))
         );
 
@@ -354,7 +327,7 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel9.setText("Chọn phương thức mã hóa: ");
 
-        method_keyGen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DES", "AES", "RSA" }));
+        method_keyGen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TDES", "AES", "RSA", "BlowFish" }));
         method_keyGen.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 method_keyGenItemStateChanged(evt);
@@ -383,8 +356,6 @@ public class Giao_dien extends javax.swing.JFrame {
             }
         });
 
-        percent_keyGen.setText("0%");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -400,22 +371,14 @@ public class Giao_dien extends javax.swing.JFrame {
                                 .addComponent(method_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ProgressBar_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(keyGen_path, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(keyGen_path, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                                 .addComponent(key_save))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(229, 229, 229)
-                                .addComponent(GenerateKey))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(260, 260, 260)
-                                .addComponent(percent_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(229, 229, 229)
+                        .addComponent(GenerateKey)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -431,11 +394,7 @@ public class Giao_dien extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(keyGen_path, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(key_save))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(ProgressBar_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(percent_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addComponent(GenerateKey)
                 .addGap(77, 77, 77))
         );
@@ -489,8 +448,8 @@ public class Giao_dien extends javax.swing.JFrame {
             encryptAlgorithm.setInputFile(inputEncryptFile);
             encryptAlgorithm.setInputKey(inputEncryptKey);
 
-            
-            encryptAlgorithm.encrypt(inputEncryptFile.getParent() + "//encrypt_" + file_name);       
+            encryptAlgorithm.encrypt(inputEncryptFile.getParent() + "//encrypt_" + file_name);
+
             hash_text.setText(HashAlgorithm.hashFile(inputEncryptFile, "MD5"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -505,12 +464,14 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED){
             String selectedItem = ComboBox_encrypt.getSelectedItem().toString();
-            if (selectedItem.equals("DES"))
+            if (selectedItem.equals("TDES"))
                 encryptAlgorithm = dESCrypto;
             if (selectedItem.equals("AES"))
                 encryptAlgorithm = aESCrypto;
             if (selectedItem.equals("RSA"))
                 encryptAlgorithm = rSACrypto;
+            if (selectedItem.equals("BlowFish"))
+                encryptAlgorithm = BFCrypto;
         }
         else 
             return;
@@ -520,12 +481,14 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED){
             String selectedItem = method_keyGen.getSelectedItem().toString();
-            if (selectedItem.equals("DES"))
+            if (selectedItem.equals("TDES"))
                 keyGen = DESKey;
             if (selectedItem.equals("AES"))
                 keyGen = AESKey;
             if (selectedItem.equals("RSA"))
                 keyGen = RSAKey;
+            if (selectedItem.equals("BlowFish"))
+                keyGen = BlowFishKeyGen;
         }
     }//GEN-LAST:event_method_keyGenItemStateChanged
 
@@ -547,6 +510,7 @@ public class Giao_dien extends javax.swing.JFrame {
     private void GenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateKeyActionPerformed
         // TODO add your handling code here:
         keyGen.writeToFile(keyGen_path.getText());
+        JOptionPane.showMessageDialog(null, "Key Generated");
     }//GEN-LAST:event_GenerateKeyActionPerformed
 
     private void hash_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hash_textActionPerformed
@@ -561,7 +525,6 @@ public class Giao_dien extends javax.swing.JFrame {
         try {
             decryptAlgorithm.setInputFile(inputDecryptFile);
             decryptAlgorithm.setInputKey(inputDecryptKey);
-            
             String outputFilePath = inputDecryptFile.getParent() + "//decrypt_" + file_name;
             decryptAlgorithm.decrypt(outputFilePath);
             
@@ -585,19 +548,20 @@ public class Giao_dien extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, afterMessage + "\n" + hashCheck);
         jProgressBar2.setIndeterminate(false);
-        percent_1.setText("0%");
     }//GEN-LAST:event_Decrypt_buttonActionPerformed
 
     private void ComboBox_decryptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBox_decryptItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED){
             String selectedItem = ComboBox_decrypt.getSelectedItem().toString();
-            if (selectedItem.equals("DES"))
+            if (selectedItem.equals("TDES"))
                 decryptAlgorithm = dESCrypto;
             if (selectedItem.equals("AES"))
                 decryptAlgorithm = aESCrypto;
             if (selectedItem.equals("RSA"))
                 decryptAlgorithm = rSACrypto;
+            if (selectedItem.equals("BlowFish"))
+                decryptAlgorithm = BFCrypto;
         }
     }//GEN-LAST:event_ComboBox_decryptItemStateChanged
 
@@ -667,7 +631,6 @@ public class Giao_dien extends javax.swing.JFrame {
     private javax.swing.JButton Decrypt_button;
     private javax.swing.JButton Encrypt_button;
     private javax.swing.JButton GenerateKey;
-    private javax.swing.JProgressBar ProgressBar_keyGen;
     private javax.swing.JTextField file_path;
     private javax.swing.JTextField file_path1;
     private javax.swing.JTextField hash_text;
@@ -686,8 +649,6 @@ public class Giao_dien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField keyGen_path;
@@ -699,8 +660,5 @@ public class Giao_dien extends javax.swing.JFrame {
     private javax.swing.JButton open_file1;
     private javax.swing.JButton open_key;
     private javax.swing.JButton open_key1;
-    private javax.swing.JTextField percent_;
-    private javax.swing.JTextField percent_1;
-    private javax.swing.JTextField percent_keyGen;
     // End of variables declaration//GEN-END:variables
 }

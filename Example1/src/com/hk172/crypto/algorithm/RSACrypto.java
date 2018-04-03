@@ -6,25 +6,15 @@
 package com.hk172.crypto.algorithm;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.RSAPrivateKeySpec;
-import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Arrays;
 import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
-import javax.swing.JProgressBar;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -36,7 +26,6 @@ public class RSACrypto extends CryptoAlgorithm{
     private KeyFactory factory ;
     private Cipher encryptCipher ;
     private Cipher decryptCipher ;
-    private final int BUFF_SIZE = 1024;
     
     public RSACrypto(){
         super();
@@ -69,26 +58,26 @@ public class RSACrypto extends CryptoAlgorithm{
     
     
     
-    @Override
-    public byte[] encrypt() throws Exception {
-        byte[] input = readFile(inputFile);
-        X509EncodedKeySpec keySpec = getPublicKeySpec(inputKey);
-        RSAPublicKey publickey = (RSAPublicKey) factory.generatePublic(keySpec);
-        
-        encryptCipher.init(Cipher.ENCRYPT_MODE, publickey);
-        return encryptCipher.doFinal(input);
-    }
-
-    @Override
-    public byte[] decrypt() throws Exception {
-        byte[] input = readFile(inputFile);
-        PKCS8EncodedKeySpec keySpec = getPrivateKeySpec(inputKey);
-        RSAPrivateKey privatekey = (RSAPrivateKey) factory.generatePrivate(keySpec);
-        
-        decryptCipher.init(Cipher.DECRYPT_MODE, privatekey);
-        return decryptCipher.doFinal(input);
-        
-    }
+//    @Override
+//    public byte[] encrypt() throws Exception {
+//        byte[] input = readFile(inputFile);
+//        X509EncodedKeySpec keySpec = getPublicKeySpec(inputKey);
+//        RSAPublicKey publickey = (RSAPublicKey) factory.generatePublic(keySpec);
+//        
+//        encryptCipher.init(Cipher.ENCRYPT_MODE, publickey);
+//        return encryptCipher.doFinal(input);
+//    }
+//
+//    @Override
+//    public byte[] decrypt() throws Exception {
+//        byte[] input = readFile(inputFile);
+//        PKCS8EncodedKeySpec keySpec = getPrivateKeySpec(inputKey);
+//        RSAPrivateKey privatekey = (RSAPrivateKey) factory.generatePrivate(keySpec);
+//        
+//        decryptCipher.init(Cipher.DECRYPT_MODE, privatekey);
+//        return decryptCipher.doFinal(input);
+//        
+//    }
 
 
     @Override

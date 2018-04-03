@@ -66,7 +66,7 @@
                       <EmptySpace pref="27" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="Encrypt_button" min="-2" max="-2" attributes="0"/>
@@ -101,14 +101,6 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jProgressBar1" min="-2" pref="375" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="percent_" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -133,11 +125,7 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ComboBox_encrypt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="percent_" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                       <Component id="Encrypt_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -188,10 +176,11 @@
             <Component class="javax.swing.JComboBox" name="ComboBox_encrypt">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="DES"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="TDES"/>
                     <StringItem index="1" value="AES"/>
                     <StringItem index="2" value="RSA"/>
+                    <StringItem index="3" value="BlowFish"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -201,13 +190,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JProgressBar" name="jProgressBar1">
-            </Component>
-            <Component class="javax.swing.JTextField" name="percent_">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="0%"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="Encrypt_button">
               <Properties>
@@ -296,16 +278,8 @@
                                   <Component id="hash_text1" min="-2" pref="370" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
-                                  <Component id="percent_1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
                                   <Component id="Decrypt_button" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                                  <Component id="jProgressBar2" min="-2" pref="377" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -336,11 +310,7 @@
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="hash_text1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="50" max="32767" attributes="0"/>
-                          <Component id="jProgressBar2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="percent_1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace pref="126" max="32767" attributes="0"/>
                           <Component id="Decrypt_button" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -385,10 +355,11 @@
                 <Component class="javax.swing.JComboBox" name="ComboBox_decrypt">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="DES"/>
+                      <StringArray count="4">
+                        <StringItem index="0" value="TDES"/>
                         <StringItem index="1" value="AES"/>
                         <StringItem index="2" value="RSA"/>
+                        <StringItem index="3" value="BlowFish"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -398,13 +369,6 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
-                </Component>
-                <Component class="javax.swing.JProgressBar" name="jProgressBar2">
-                </Component>
-                <Component class="javax.swing.JTextField" name="percent_1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="0%"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="Decrypt_button">
                   <Properties>
@@ -449,30 +413,17 @@
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="ProgressBar_keyGen" min="-2" pref="375" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="keyGen_path" min="-2" pref="376" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="keyGen_path" min="-2" pref="376" max="-2" attributes="0"/>
                                       <EmptySpace pref="15" max="32767" attributes="0"/>
                                       <Component id="key_save" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
-                                      <Component id="GenerateKey" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
-                                      <Component id="percent_keyGen" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
+                              <Component id="GenerateKey" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -494,11 +445,7 @@
                           <Component id="keyGen_path" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="key_save" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="43" max="32767" attributes="0"/>
-                      <Component id="ProgressBar_keyGen" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="percent_keyGen" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
                       <Component id="GenerateKey" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
@@ -514,10 +461,11 @@
             <Component class="javax.swing.JComboBox" name="method_keyGen">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="DES"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="TDES"/>
                     <StringItem index="1" value="AES"/>
                     <StringItem index="2" value="RSA"/>
+                    <StringItem index="3" value="BlowFish"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -553,13 +501,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GenerateKeyActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JProgressBar" name="ProgressBar_keyGen">
-            </Component>
-            <Component class="javax.swing.JTextField" name="percent_keyGen">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="0%"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

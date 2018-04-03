@@ -19,12 +19,12 @@ import javax.xml.bind.DatatypeConverter;
  *
  * @author binhchiu
  */
-public class DESKeyGen implements KeyGen{
+public class TDESKeyGen implements KeyGen{
     private KeyGenerator keygen ;
-    private final int keyLength = 56;
-    public DESKeyGen() {
+    private final int keyLength = 168;
+    public TDESKeyGen() {
         try {
-            keygen = KeyGenerator.getInstance("DES");
+            keygen = KeyGenerator.getInstance("DESede");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,16 +36,16 @@ public class DESKeyGen implements KeyGen{
         try {
             SecretKey skey = genKey();
             String skeyString = parseKeyString(skey);
-            File file = new File(path + "//DESKey.txt");
+            File file = new File(path + "//TDESKey.txt");
             fw = new FileWriter(file);
             fw.write(skeyString);
         } catch (IOException ex) {
-            Logger.getLogger(DESKeyGen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TDESKeyGen.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 fw.close();
             } catch (IOException ex) {
-                Logger.getLogger(DESKeyGen.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TDESKeyGen.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

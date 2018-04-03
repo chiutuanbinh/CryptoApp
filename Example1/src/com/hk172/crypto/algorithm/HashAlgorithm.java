@@ -19,36 +19,7 @@ import javax.xml.bind.DatatypeConverter;
  * @author binhchiu
  */
 public class HashAlgorithm {
-    protected File input;
-    protected String hashType;
-    MessageDigest md = null;
-    public void setInput(File input){
-        this.input = input ;
-        
-    }
-    private byte[] readFile() throws Exception{
-        return Files.readAllBytes(input.toPath());
-    }
-
-    public void setHashType(String hashType){
-        this.hashType = hashType;
-        try {
-            md = MessageDigest.getInstance(hashType);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(HashAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public byte[] run() throws Exception {
-        byte[] input = readFile();
-        return md.digest(input);
-    }
-    
-    public byte[] run(byte[] input) throws Exception{
-        
-        return md.digest(input);
-    }
-    
+     
     public static String hashFile(File inputFile, String hashType) throws Exception{
         MessageDigest md = MessageDigest.getInstance(hashType);
         FileInputStream fs = new FileInputStream(inputFile);
@@ -61,11 +32,6 @@ public class HashAlgorithm {
         return DatatypeConverter.printHexBinary(md.digest());
     }
     
-    public void append(byte[] nextblock) {
-        md.update(nextblock);
-    }
-    public byte[] executeHash(){
-        return md.digest();
-    }
+
     
 }
