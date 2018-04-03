@@ -20,6 +20,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -91,67 +92,28 @@ public class RSACrypto extends CryptoAlgorithm{
 
 
     @Override
-    public void encrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception {
+    public void encrypt(String path) throws Exception {
         byte[] input = readFile(inputFile);
         X509EncodedKeySpec keySpec = getPublicKeySpec(inputKey);
         RSAPublicKey publickey = (RSAPublicKey) factory.generatePublic(keySpec);
         
         encryptCipher.init(Cipher.ENCRYPT_MODE, publickey);
-        FileInputStream fis = new FileInputStream(inputFile);
         FileOutputStream fos = new FileOutputStream(path);
-        
-        CipherOutputStream cos = new CipherOutputStream(fos, encryptCipher);
-        byte[] inputBuffer = new byte[BUFF_SIZE];
-        long read = 0;
-        long offset = inputFile.length();
-        int unitsize;
-        
-        while (read < offset) {
-            unitsize = (int) (((offset - read) >= BUFF_SIZE) ? BUFF_SIZE : (offset - read));
-            
-//            System.out.println(unitsize);
-            fis.read(inputBuffer, 0, unitsize);
-            hashFunc.append(inputBuffer);
-            cos.write(inputBuffer,0, unitsize);
-            
-            read += unitsize;
-            progressBar.setValue((int) (read*100/offset));
-        }
-//        System.out.println((int)read/offset);
-//        System.out.println(offset);
-        cos.close();
-        
+        fos.write(encryptCipher.doFinal(input));
+        fos.close();             
     }
 
     @Override
-    public void decrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception {
+    public void decrypt(String path) throws Exception {
         byte[] input = readFile(inputFile);
         PKCS8EncodedKeySpec keySpec = getPrivateKeySpec(inputKey);
         RSAPrivateKey privatekey = (RSAPrivateKey) factory.generatePrivate(keySpec);
         
         decryptCipher.init(Cipher.DECRYPT_MODE, privatekey);
-        FileInputStream fis = new FileInputStream(inputFile);
+        
+        byte[] result = decryptCipher.doFinal(input);
         FileOutputStream fos = new FileOutputStream(path);
-        
-        CipherInputStream cis = new CipherInputStream(fis, encryptCipher);
-        byte[] inputBuffer = new byte[BUFF_SIZE];
-        long read = 0;
-        long offset = inputFile.length();
-        int unitsize;
-        
-        while (read < offset) {
-            unitsize = (int) (((offset - read) >= BUFF_SIZE) ? BUFF_SIZE : (offset - read));
-            
-            cis.read(inputBuffer,0,unitsize);
-            hashFunc.append(inputBuffer);
-            
-            fos.write(inputBuffer, 0, unitsize);
-            
-            read += unitsize;
-            progressBar.setValue((int) (read*100/offset));
-        }
-        cis.close();
-    }
-    
-    
+        fos.write(result);
+        fos.close();
+    }    
 }

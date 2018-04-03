@@ -53,7 +53,7 @@ public class DESCrypto extends CryptoAlgorithm{
     }
 
     @Override
-    public void encrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception {
+    public void encrypt(String path) throws Exception {
         //get the key
         byte[] key = readKey(inputKey);
         //prepare the file
@@ -75,11 +75,9 @@ public class DESCrypto extends CryptoAlgorithm{
             
 //            System.out.println(unitsize);
             fs.read(inputBuffer, 0, unitsize);
-            hashFunc.append(inputBuffer);
             cos.write(inputBuffer,0, unitsize);
             
             read += unitsize;
-            progressBar.setValue((int) (read*100/offset));
         }
 //        System.out.println((int)read/offset);
 //        System.out.println(offset);
@@ -99,7 +97,7 @@ public class DESCrypto extends CryptoAlgorithm{
     }
 
     @Override
-    public void decrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception {
+    public void decrypt(String path) throws Exception {
         //get the key
         byte[] key = readKey(inputKey);
         byte[] inputBuffer = new byte[BUFF_SIZE];
@@ -111,7 +109,8 @@ public class DESCrypto extends CryptoAlgorithm{
         decryptCipher.init(Cipher.DECRYPT_MODE, skey);
         
         //wrap the fos into a cipherstream
-        CipherInputStream cis = new CipherInputStream(fs, decryptCipher);
+        
+        CipherOutputStream cos = new CipherOutputStream(fos, decryptCipher);
         
         //init value for cipher
         long read = 0;
@@ -120,17 +119,15 @@ public class DESCrypto extends CryptoAlgorithm{
         
         //read and print the value by blocks
         while (read < offset) {
-            unitsize = (int) (((offset - read) >= BUFF_SIZE) ? BUFF_SIZE : (offset - read));
+            unitsize = (int) (((offset - read - 8) >= BUFF_SIZE) ? BUFF_SIZE : (offset - read));
             
-            cis.read(inputBuffer,0,unitsize);
-            hashFunc.append(inputBuffer);
+            fs.read(inputBuffer,0,unitsize);
             
-            fos.write(inputBuffer, 0, unitsize);
-            
+            cos.write(inputBuffer, 0, unitsize);
+            System.out.println(unitsize);
             read += unitsize;
-            progressBar.setValue((int) (read*100/offset));
         }
-        cis.close();
+        cos.close();
     }
     
 }

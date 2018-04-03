@@ -59,6 +59,6 @@ public abstract class CryptoAlgorithm {
      * @param hashFunc the hashFunc
      * @throws Exception if file not found, or Function not found
      */
-    public abstract void encrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception;
-    public abstract void decrypt (String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception;
+    public abstract void encrypt(String path) throws Exception;
+    public abstract void decrypt (String path) throws Exception;
 }

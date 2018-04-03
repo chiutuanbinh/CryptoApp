@@ -483,21 +483,22 @@ public class Giao_dien extends javax.swing.JFrame {
 
     private void Encrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Encrypt_buttonActionPerformed
         // TODO add your handling code here:
+        jProgressBar1.setIndeterminate(true);
         String afterMessage = "Encrypt Success";
         try {
             encryptAlgorithm.setInputFile(inputEncryptFile);
             encryptAlgorithm.setInputKey(inputEncryptKey);
 
-            encryptAlgorithm.encrypt(inputEncryptFile.getParent() + "//encrypt2_" + file_name, jProgressBar1, hashAlgorithm);       
             
+            encryptAlgorithm.encrypt(inputEncryptFile.getParent() + "//encrypt_" + file_name);       
+            hash_text.setText(HashAlgorithm.hashFile(inputEncryptFile, "MD5"));
         } catch (Exception e) {
             e.printStackTrace();
             afterMessage = "Encrypt Failed";
         }
-        hash_text.setText(DatatypeConverter.printHexBinary(hashAlgorithm.executeHash()));
+        
         JOptionPane.showMessageDialog(null, afterMessage);
-        jProgressBar1.setValue(0);
-        percent_.setText("0%");
+        jProgressBar1.setIndeterminate(false);
     }//GEN-LAST:event_Encrypt_buttonActionPerformed
 
     private void ComboBox_encryptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBox_encryptItemStateChanged
@@ -526,8 +527,6 @@ public class Giao_dien extends javax.swing.JFrame {
             if (selectedItem.equals("RSA"))
                 keyGen = RSAKey;
         }
-        else 
-            return;
     }//GEN-LAST:event_method_keyGenItemStateChanged
 
     private void keyGen_pathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keyGen_pathActionPerformed
@@ -558,19 +557,19 @@ public class Giao_dien extends javax.swing.JFrame {
         // TODO add your handling code here:
         String afterMessage = "Decrypt Success";
         String hashCheck = "";
-
+        jProgressBar2.setIndeterminate(true);
         try {
             decryptAlgorithm.setInputFile(inputDecryptFile);
             decryptAlgorithm.setInputKey(inputDecryptKey);
-
-            decryptAlgorithm.decrypt(inputDecryptFile.getParent() + "//decrypt2_" + file_name, jProgressBar2, hashAlgorithm);
+            
+            String outputFilePath = inputDecryptFile.getParent() + "//decrypt_" + file_name;
+            decryptAlgorithm.decrypt(outputFilePath);
             
             String hashString = hash_text1.getText();
-            byte[] hashResult = hashAlgorithm.executeHash();
+            String hashResult = HashAlgorithm.hashFile(new File(outputFilePath), "MD5");
 
-            String hashResultString = DatatypeConverter.printHexBinary(hashResult);
-            System.out.println(hashResultString);
-            if (hashString.equals(hashResultString)){
+            System.out.println(hashResult);
+            if (hashString.equals(hashResult)){
                 hashCheck = "Hash check success";
             }
             else if (!hashString.equals("")){
@@ -585,7 +584,7 @@ public class Giao_dien extends javax.swing.JFrame {
             afterMessage = "Decrypt Failed";
         }
         JOptionPane.showMessageDialog(null, afterMessage + "\n" + hashCheck);
-        jProgressBar2.setValue(0);
+        jProgressBar2.setIndeterminate(false);
         percent_1.setText("0%");
     }//GEN-LAST:event_Decrypt_buttonActionPerformed
 
@@ -594,14 +593,12 @@ public class Giao_dien extends javax.swing.JFrame {
         if (evt.getStateChange() == ItemEvent.SELECTED){
             String selectedItem = ComboBox_decrypt.getSelectedItem().toString();
             if (selectedItem.equals("DES"))
-            decryptAlgorithm = dESCrypto;
+                decryptAlgorithm = dESCrypto;
             if (selectedItem.equals("AES"))
-            decryptAlgorithm = aESCrypto;
+                decryptAlgorithm = aESCrypto;
             if (selectedItem.equals("RSA"))
-            decryptAlgorithm = rSACrypto;
+                decryptAlgorithm = rSACrypto;
         }
-        else
-        return;
     }//GEN-LAST:event_ComboBox_decryptItemStateChanged
 
     private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed

@@ -61,7 +61,7 @@ public class AESCrypto extends CryptoAlgorithm{
     }
 
     @Override
-    public void encrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception {
+    public void encrypt(String path) throws Exception {
         byte[] key = readKey(inputKey);
         
         FileInputStream fis = new FileInputStream(inputFile);
@@ -71,7 +71,6 @@ public class AESCrypto extends CryptoAlgorithm{
         IvParameterSpec iv = new IvParameterSpec(sKey.getEncoded());
         encryptCipher.init(Cipher.ENCRYPT_MODE, sKey, iv);
         
-        
         CipherOutputStream cos = new CipherOutputStream(fos, encryptCipher);
         byte[] inputBuffer = new byte[BUFF_SIZE];
         long read = 0;
@@ -80,20 +79,18 @@ public class AESCrypto extends CryptoAlgorithm{
         
         while (read < offset) {
             unitsize = (int) (((offset - read) >= BUFF_SIZE) ? BUFF_SIZE : (offset - read));
-            
+            System.out.println(unitsize);
             fis.read(inputBuffer, 0, unitsize);
-            hashFunc.append(Arrays.copyOfRange(inputBuffer, 0, unitsize-1));
             cos.write(inputBuffer,0, unitsize);
-            
             read += unitsize;
-            progressBar.setValue((int) (read*100/offset));
+            
         }
         cos.close();
         
     }
 
     @Override
-    public void decrypt(String path, JProgressBar progressBar, HashAlgorithm hashFunc) throws Exception {
+    public void decrypt(String path) throws Exception {
         byte[] key = readKey(inputKey);
         
         FileInputStream fis = new FileInputStream(inputFile);
@@ -103,7 +100,7 @@ public class AESCrypto extends CryptoAlgorithm{
         IvParameterSpec iv = new IvParameterSpec(skey.getEncoded());
         decryptCipher.init(Cipher.DECRYPT_MODE, skey, iv);
         
-        CipherInputStream cis = new CipherInputStream(fis, decryptCipher);
+        CipherOutputStream cos = new CipherOutputStream(fos, decryptCipher);
         byte[] inputBuffer = new byte[BUFF_SIZE];
         long read = 0;
         long offset = inputFile.length();
@@ -111,16 +108,14 @@ public class AESCrypto extends CryptoAlgorithm{
         
         while (read < offset) {
             unitsize = (int) (((offset - read) >= BUFF_SIZE) ? BUFF_SIZE : (offset - read));
-            
-            cis.read(inputBuffer,0,unitsize);
-            hashFunc.append(Arrays.copyOfRange(inputBuffer, 0, unitsize-1));
-            
-            fos.write(inputBuffer, 0, unitsize);
-            
+           
+            fis.read(inputBuffer,0,unitsize);          
+            cos.write(inputBuffer, 0, unitsize);
             read += unitsize;
-            progressBar.setValue((int) (read*100/offset));
+            
         }
-        cis.close();
+        cos.close();
+        fis.close();
     }
     
 }
