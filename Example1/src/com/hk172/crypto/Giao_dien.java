@@ -73,28 +73,30 @@ public class Giao_dien extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        file_path = new javax.swing.JTextField();
-        key_path = new javax.swing.JTextField();
-        open_file = new javax.swing.JButton();
-        open_key = new javax.swing.JButton();
+        filepath_encrypt = new javax.swing.JTextField();
+        keypath_encrypt = new javax.swing.JTextField();
+        openfile_encrypt = new javax.swing.JButton();
+        openkey_encrypt = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         ComboBox_encrypt = new javax.swing.JComboBox<>();
         Encrypt_button = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        hash_text = new javax.swing.JTextField();
+        hashtext_encrypt = new javax.swing.JTextField();
+        dir_encrypt = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        file_path1 = new javax.swing.JTextField();
-        key_path1 = new javax.swing.JTextField();
-        open_file1 = new javax.swing.JButton();
-        open_key1 = new javax.swing.JButton();
+        filepath_decrypt = new javax.swing.JTextField();
+        keypath_decrypt = new javax.swing.JTextField();
+        openfile_decrypt = new javax.swing.JButton();
+        openkey_decrypt = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         ComboBox_decrypt = new javax.swing.JComboBox<>();
         Decrypt_button = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        hash_text1 = new javax.swing.JTextField();
+        hashtext_decrypt = new javax.swing.JTextField();
+        dir_decrypt = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         method_keyGen = new javax.swing.JComboBox<>();
@@ -109,17 +111,17 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel2.setText("Chọn khóa: ");
 
-        open_file.setText("Browser");
-        open_file.addActionListener(new java.awt.event.ActionListener() {
+        openfile_encrypt.setText("Browser");
+        openfile_encrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                open_fileActionPerformed(evt);
+                openfile_encryptActionPerformed(evt);
             }
         });
 
-        open_key.setText("Browser");
-        open_key.addActionListener(new java.awt.event.ActionListener() {
+        openkey_encrypt.setText("Browser");
+        openkey_encrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                open_keyActionPerformed(evt);
+                openkey_encryptActionPerformed(evt);
             }
         });
 
@@ -141,9 +143,16 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel4.setText("Hash code:  ");
 
-        hash_text.addActionListener(new java.awt.event.ActionListener() {
+        hashtext_encrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hash_textActionPerformed(evt);
+                hashtext_encryptActionPerformed(evt);
+            }
+        });
+
+        dir_encrypt.setText("Mã hóa thư mục");
+        dir_encrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dir_encryptActionPerformed(evt);
             }
         });
 
@@ -152,18 +161,14 @@ public class Giao_dien extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(hash_text, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Encrypt_button)
-                        .addGap(235, 235, 235))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(hashtext_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -172,62 +177,70 @@ public class Giao_dien extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(file_path, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(key_path)))
+                                        .addComponent(keypath_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dir_encrypt)
+                                            .addComponent(filepath_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(open_file)
-                                    .addComponent(open_key))))
-                        .addContainerGap())))
+                                    .addComponent(openfile_encrypt)
+                                    .addComponent(openkey_encrypt))))))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Encrypt_button)
+                .addGap(237, 237, 237))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(20, 20, 20)
+                .addComponent(dir_encrypt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(file_path, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(open_file))
+                    .addComponent(filepath_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(openfile_encrypt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(key_path, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(open_key))
-                .addGap(38, 38, 38)
+                    .addComponent(keypath_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(openkey_encrypt))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(ComboBox_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(109, 109, 109)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(Encrypt_button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(hash_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hashtext_encrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
-        jTabbedPane1.addTab("Encrypt", jPanel1);
+        jTabbedPane1.addTab("   Encrypt   ", jPanel1);
 
         jLabel5.setText("Chọn tập tin: ");
 
         jLabel6.setText("Chọn khóa: ");
 
-        open_file1.setText("Browser");
-        open_file1.addActionListener(new java.awt.event.ActionListener() {
+        openfile_decrypt.setText("Browser");
+        openfile_decrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                open_file1ActionPerformed(evt);
+                openfile_decryptActionPerformed(evt);
             }
         });
 
-        open_key1.setText("Browser");
-        open_key1.addActionListener(new java.awt.event.ActionListener() {
+        openkey_decrypt.setText("Browser");
+        openkey_decrypt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                open_key1ActionPerformed(evt);
+                openkey_decryptActionPerformed(evt);
             }
         });
 
@@ -249,52 +262,66 @@ public class Giao_dien extends javax.swing.JFrame {
 
         jLabel8.setText("Hash code (nếu có):  ");
 
+        dir_decrypt.setText("Giải mã thư mục");
+        dir_decrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dir_decryptActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ComboBox_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(file_path1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(key_path1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(open_key1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(open_file1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hash_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(Decrypt_button)))
-                .addGap(22, 22, 22))
+                                .addComponent(ComboBox_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(keypath_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(dir_decrypt)
+                                            .addComponent(filepath_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(openkey_decrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(openfile_decrypt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hashtext_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(Decrypt_button)
+                        .addGap(231, 231, 231))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(dir_decrypt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(file_path1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(open_file1))
+                    .addComponent(filepath_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(openfile_decrypt))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(key_path1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(open_key1))
+                    .addComponent(keypath_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(openkey_decrypt))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -302,9 +329,10 @@ public class Giao_dien extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(hash_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                .addComponent(Decrypt_button))
+                    .addComponent(hashtext_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(Decrypt_button)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -313,7 +341,7 @@ public class Giao_dien extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 569, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -323,7 +351,7 @@ public class Giao_dien extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Decrypt", jPanel2);
+        jTabbedPane1.addTab("   Decrypt   ", jPanel2);
 
         jLabel9.setText("Chọn phương thức mã hóa: ");
 
@@ -361,31 +389,28 @@ public class Giao_dien extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(method_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(keyGen_path, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                                .addComponent(key_save))))
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(method_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(GenerateKey)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(keyGen_path, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(key_save)))
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(GenerateKey)
+                .addGap(237, 237, 237))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(method_keyGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -394,12 +419,12 @@ public class Giao_dien extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(keyGen_path, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(key_save))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addGap(85, 85, 85)
                 .addComponent(GenerateKey)
-                .addGap(77, 77, 77))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Generate key", jPanel4);
+        jTabbedPane1.addTab("   Generate key   ", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -417,47 +442,79 @@ public class Giao_dien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void open_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_fileActionPerformed
+    private void openfile_encryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openfile_encryptActionPerformed
         // TODO add your handling code here:
+        if (dir_encrypt.isSelected()==true) {
+            
+            open_file obj= new open_file();
+            try {
+                inputEncryptFile = obj.open_folder();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            filepath_encrypt.setText(obj.sb2);
+            //file_name = obj.filename;
+            
+        }
+        else{
         open_file obj= new open_file();
         try {
-            inputEncryptFile = obj.pick_me();
+            inputEncryptFile = obj.open_file();
         }catch (Exception e){
             e.printStackTrace();
         }
-        file_path.setText(obj.sb2);
+        filepath_encrypt.setText(obj.sb2);
         file_name = obj.filename;
-    }//GEN-LAST:event_open_fileActionPerformed
+        }
+    }//GEN-LAST:event_openfile_encryptActionPerformed
 
-    private void open_keyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_keyActionPerformed
+    private void openkey_encryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openkey_encryptActionPerformed
         // TODO add your handling code here:
         open_file obj= new open_file();
         try {
-            inputEncryptKey = obj.pick_me();
+            inputEncryptKey = obj.open_file();
         }catch (Exception e){
             e.printStackTrace();
         }
-        key_path.setText(obj.sb2);
-    }//GEN-LAST:event_open_keyActionPerformed
+        keypath_encrypt.setText(obj.sb2);
+    }//GEN-LAST:event_openkey_encryptActionPerformed
 
     private void Encrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Encrypt_buttonActionPerformed
-        // TODO add your handling code here:
-        jProgressBar1.setIndeterminate(true);
         String afterMessage = "Encrypt Success";
-        try {
-            encryptAlgorithm.setInputFile(inputEncryptFile);
-            encryptAlgorithm.setInputKey(inputEncryptKey);
-
-            encryptAlgorithm.encrypt(inputEncryptFile.getParent() + "//encrypt_" + file_name);
-
-            hash_text.setText(HashAlgorithm.hashFile(inputEncryptFile, "MD5"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            afterMessage = "Encrypt Failed";
+        if (dir_encrypt.isSelected()==true){
+            
+            File[] listOfFiles = inputEncryptFile.listFiles();
+            new File(listOfFiles[0].getParent()+"_encrypt").mkdir();
+            //System.out.print(listOfFiles[0].getParent());
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()==true) {
+                    try {
+                    encryptAlgorithm.setInputFile(listOfFiles[i]);
+                    encryptAlgorithm.setInputKey(inputEncryptKey);                    
+                    encryptAlgorithm.encrypt(listOfFiles[i].getParent()+ "_encrypt"+ "//encrypt_" + listOfFiles[i].getName());       
+                    //hash_text.setText(HashAlgorithm.hashFile(listOfFiles[i], "MD5"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        afterMessage = "Encrypt Failed";
+                    }
+                } 
+            }   
         }
-        
+        else {
+            try {
+                encryptAlgorithm.setInputFile(inputEncryptFile);
+                encryptAlgorithm.setInputKey(inputEncryptKey);
+
+                encryptAlgorithm.encrypt(inputEncryptFile.getParent() + "//encrypt_" + file_name);
+
+                hashtext_encrypt.setText(HashAlgorithm.hashFile(inputEncryptFile, "MD5"));
+            } catch (Exception e) {
+                e.printStackTrace();
+                afterMessage = "Encrypt Failed";
+            }
+        }
         JOptionPane.showMessageDialog(null, afterMessage);
-        jProgressBar1.setIndeterminate(false);
+        //jProgressBar1.setIndeterminate(false);
     }//GEN-LAST:event_Encrypt_buttonActionPerformed
 
     private void ComboBox_encryptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBox_encryptItemStateChanged
@@ -513,41 +570,53 @@ public class Giao_dien extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Key Generated");
     }//GEN-LAST:event_GenerateKeyActionPerformed
 
-    private void hash_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hash_textActionPerformed
+    private void hashtext_encryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hashtext_encryptActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hash_textActionPerformed
+    }//GEN-LAST:event_hashtext_encryptActionPerformed
 
     private void Decrypt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Decrypt_buttonActionPerformed
         // TODO add your handling code here:
         String afterMessage = "Decrypt Success";
         String hashCheck = "";
-        jProgressBar2.setIndeterminate(true);
-        try {
-            decryptAlgorithm.setInputFile(inputDecryptFile);
-            decryptAlgorithm.setInputKey(inputDecryptKey);
-            String outputFilePath = inputDecryptFile.getParent() + "//decrypt_" + file_name;
-            decryptAlgorithm.decrypt(outputFilePath);
-            
-            String hashString = hash_text1.getText();
-            String hashResult = HashAlgorithm.hashFile(new File(outputFilePath), "MD5");
-
-            System.out.println(hashResult);
-            if (hashString.equals(hashResult)){
-                hashCheck = "Hash check success";
+        if (dir_encrypt.isSelected()==true){
+            File[] listOfFiles = inputDecryptFile.listFiles();
+            new File(listOfFiles[0].getParent()+"_decrypt").mkdir();
+            //System.out.print(listOfFiles[0].getParent());
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()==true) {
+                    try {
+                    decryptAlgorithm.setInputFile(listOfFiles[i]);
+                    decryptAlgorithm.setInputKey(inputEncryptKey);                    
+                    decryptAlgorithm.decrypt(listOfFiles[i].getParent()+ "_decrypt"+"//decrypt_" + listOfFiles[i].getName());       
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        afterMessage = "Decrypt Failed";
+                    }
+                } 
+            }   
+        }
+        else {
+            try {
+                decryptAlgorithm.setInputFile(inputDecryptFile);
+                decryptAlgorithm.setInputKey(inputDecryptKey);
+                String outputFilePath = inputDecryptFile.getParent() + "//decrypt_" + file_name;
+                decryptAlgorithm.decrypt(outputFilePath);
+                String hashString = hashtext_decrypt.getText();
+                String hashResult = HashAlgorithm.hashFile(new File(outputFilePath), "MD5");
+                
+                System.out.println(hashResult);
+                if (hashString.equals(hashResult)){
+                    hashCheck = "Hash check success";
+                }
+                else if (!hashString.equals("")){
+                    hashCheck = "Hash check failed";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                afterMessage = "Decrypt Failed";
             }
-            else if (!hashString.equals("")){
-                hashCheck = "Hash check failed";
-            }
-
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            afterMessage = "Decrypt Failed";
         }
         JOptionPane.showMessageDialog(null, afterMessage + "\n" + hashCheck);
-        jProgressBar2.setIndeterminate(false);
     }//GEN-LAST:event_Decrypt_buttonActionPerformed
 
     private void ComboBox_decryptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBox_decryptItemStateChanged
@@ -565,28 +634,53 @@ public class Giao_dien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ComboBox_decryptItemStateChanged
 
-    private void open_key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_key1ActionPerformed
+    private void openkey_decryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openkey_decryptActionPerformed
         // TODO add your handling code here:
         open_file obj= new open_file();
         try {
-            inputDecryptKey = obj.pick_me();
+            inputDecryptKey = obj.open_file();
         }catch (Exception e){
             e.printStackTrace();
         }
-        key_path1.setText(obj.sb2);
-    }//GEN-LAST:event_open_key1ActionPerformed
+        keypath_decrypt.setText(obj.sb2);
+    }//GEN-LAST:event_openkey_decryptActionPerformed
 
-    private void open_file1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_open_file1ActionPerformed
-        // TODO add your handling code here:
-        open_file obj= new open_file();
-        try {
-            inputDecryptFile = obj.pick_me();
-        }catch (Exception e){
-            e.printStackTrace();
+    private void openfile_decryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openfile_decryptActionPerformed
+        if (dir_decrypt.isSelected()==true) {
+            open_file obj= new open_file();
+            try {
+                inputDecryptFile = obj.open_folder();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            filepath_decrypt.setText(obj.sb2);
+            
         }
-        file_path1.setText(obj.sb2);
-        file_name = obj.filename;
-    }//GEN-LAST:event_open_file1ActionPerformed
+        else{
+        open_file obj= new open_file();
+            try {
+                inputDecryptFile = obj.open_file();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            filepath_decrypt.setText(obj.sb2);
+            file_name = obj.filename;
+        }
+    }//GEN-LAST:event_openfile_decryptActionPerformed
+
+    private void dir_encryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dir_encryptActionPerformed
+        if (dir_encrypt.isSelected()==true){
+            hashtext_encrypt.setEnabled(false);
+        }
+        else hashtext_encrypt.setEnabled(true);
+    }//GEN-LAST:event_dir_encryptActionPerformed
+
+    private void dir_decryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dir_decryptActionPerformed
+        if (dir_decrypt.isSelected()==true){
+            hashtext_decrypt.setEnabled(false);
+        }
+        else hashtext_decrypt.setEnabled(true);
+    }//GEN-LAST:event_dir_decryptActionPerformed
 
     /**
      * @param args the command line arguments
@@ -631,10 +725,12 @@ public class Giao_dien extends javax.swing.JFrame {
     private javax.swing.JButton Decrypt_button;
     private javax.swing.JButton Encrypt_button;
     private javax.swing.JButton GenerateKey;
-    private javax.swing.JTextField file_path;
-    private javax.swing.JTextField file_path1;
-    private javax.swing.JTextField hash_text;
-    private javax.swing.JTextField hash_text1;
+    private javax.swing.JCheckBox dir_decrypt;
+    private javax.swing.JCheckBox dir_encrypt;
+    private javax.swing.JTextField filepath_decrypt;
+    private javax.swing.JTextField filepath_encrypt;
+    private javax.swing.JTextField hashtext_decrypt;
+    private javax.swing.JTextField hashtext_encrypt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -652,13 +748,13 @@ public class Giao_dien extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField keyGen_path;
-    private javax.swing.JTextField key_path;
-    private javax.swing.JTextField key_path1;
     private javax.swing.JButton key_save;
+    private javax.swing.JTextField keypath_decrypt;
+    private javax.swing.JTextField keypath_encrypt;
     private javax.swing.JComboBox<String> method_keyGen;
-    private javax.swing.JButton open_file;
-    private javax.swing.JButton open_file1;
-    private javax.swing.JButton open_key;
-    private javax.swing.JButton open_key1;
+    private javax.swing.JButton openfile_decrypt;
+    private javax.swing.JButton openfile_encrypt;
+    private javax.swing.JButton openkey_decrypt;
+    private javax.swing.JButton openkey_encrypt;
     // End of variables declaration//GEN-END:variables
 }
