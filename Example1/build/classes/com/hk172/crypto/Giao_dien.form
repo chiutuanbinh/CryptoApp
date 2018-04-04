@@ -59,51 +59,47 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" pref="71" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="hashtext_encrypt" min="-2" pref="437" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="hashtext_encrypt" min="-2" pref="417" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="ComboBox_encrypt" min="-2" pref="144" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="keypath_encrypt" min="-2" pref="376" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="dir_encrypt" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="filepath_encrypt" min="-2" pref="376" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="openfile_encrypt" min="-2" max="-2" attributes="0"/>
-                                          <Component id="openkey_encrypt" min="-2" max="-2" attributes="0"/>
+                                          <Component id="dir_encrypt" min="-2" max="-2" attributes="0"/>
+                                          <Component id="filepath_encrypt" min="-2" pref="376" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="20" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="ComboBox_encrypt" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="keypath_encrypt" min="-2" pref="376" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="openfile_encrypt" min="-2" max="-2" attributes="0"/>
+                                  <Component id="openkey_encrypt" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace pref="34" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="Encrypt_button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Encrypt_button" min="-2" pref="88" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -130,9 +126,9 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ComboBox_encrypt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
-                      <Component id="Encrypt_button" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <EmptySpace pref="46" max="32767" attributes="0"/>
+                      <Component id="Encrypt_button" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="hashtext_encrypt" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -145,12 +141,12 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n t&#x1ead;p tin: "/>
+                <Property name="text" type="java.lang.String" value="Choose file/folder:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n kh&#xf3;a: "/>
+                <Property name="text" type="java.lang.String" value="Choose key:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="filepath_encrypt">
@@ -175,7 +171,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n ph&#x1b0;&#x1a1;ng th&#x1ee9;c m&#xe3; h&#xf3;a: "/>
+                <Property name="text" type="java.lang.String" value="Choose method:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="ComboBox_encrypt">
@@ -216,7 +212,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="dir_encrypt">
               <Properties>
-                <Property name="text" type="java.lang.String" value="M&#xe3; h&#xf3;a th&#x1b0; m&#x1ee5;c"/>
+                <Property name="text" type="java.lang.String" value="Encrypt folder"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dir_encryptActionPerformed"/>
@@ -261,48 +257,44 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="ComboBox_decrypt" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="keypath_decrypt" min="-2" pref="376" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="keypath_decrypt" min="-2" pref="376" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="dir_decrypt" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="filepath_decrypt" min="-2" pref="376" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <Component id="jLabel7" max="32767" attributes="0"/>
+                                              <Component id="jLabel5" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="openkey_decrypt" max="32767" attributes="0"/>
-                                              <Component id="openfile_decrypt" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="dir_decrypt" min="-2" max="-2" attributes="0"/>
+                                              <Component id="filepath_decrypt" min="-2" pref="376" max="-2" attributes="0"/>
+                                              <Component id="ComboBox_decrypt" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="hashtext_decrypt" min="-2" pref="370" max="-2" attributes="0"/>
-                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="openkey_decrypt" max="32767" attributes="0"/>
+                                      <Component id="openfile_decrypt" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="Decrypt_button" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="hashtext_decrypt" min="-2" pref="370" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="Decrypt_button" min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -334,8 +326,8 @@
                               <Component id="hashtext_decrypt" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="Decrypt_button" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="64" max="32767" attributes="0"/>
+                          <Component id="Decrypt_button" min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace pref="52" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -343,12 +335,12 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n t&#x1ead;p tin: "/>
+                    <Property name="text" type="java.lang.String" value="Choose file/folder:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n kh&#xf3;a: "/>
+                    <Property name="text" type="java.lang.String" value="Choose key"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="filepath_decrypt">
@@ -373,7 +365,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="CH&#x1ecd;n ph&#x1b0;&#x1a1;ng th&#x1ee9;c gi&#x1ea3;i m&#xe3;: "/>
+                    <Property name="text" type="java.lang.String" value="Choose method"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="ComboBox_decrypt">
@@ -404,14 +396,14 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Hash code (n&#x1ebf;u c&#xf3;):  "/>
+                    <Property name="text" type="java.lang.String" value="Hash code (if yes):  "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="hashtext_decrypt">
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="dir_decrypt">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Gi&#x1ea3;i m&#xe3; th&#x1b0; m&#x1ee5;c"/>
+                    <Property name="text" type="java.lang.String" value="Decrypt folder"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dir_decryptActionPerformed"/>
@@ -436,24 +428,23 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="method_keyGen" min="-2" pref="144" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="keyGen_path" min="-2" pref="376" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="key_save" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="method_keyGen" min="-2" pref="144" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="GenerateKey" min="-2" max="-2" attributes="0"/>
+                      <Component id="GenerateKey" min="-2" pref="119" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -472,8 +463,8 @@
                           <Component id="keyGen_path" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="key_save" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                      <Component id="GenerateKey" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="GenerateKey" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace pref="106" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -482,7 +473,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n ph&#x1b0;&#x1a1;ng th&#x1ee9;c m&#xe3; h&#xf3;a: "/>
+                <Property name="text" type="java.lang.String" value="Choose method:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="method_keyGen">
@@ -505,7 +496,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n v&#x1ecb; tr&#xed; l&#x1b0;u:"/>
+                <Property name="text" type="java.lang.String" value="Choode folder to save:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="keyGen_path">
